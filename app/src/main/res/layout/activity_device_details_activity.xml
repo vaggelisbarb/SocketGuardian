@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".activity.DeviceDetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.9">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="24dp"
+                        android:clickable="true"
+                        android:padding="10dp"
+                        android:src="@drawable/back"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/titleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/coda"
+                        android:text="Device Name"
+                        android:textAlignment="center"
+                        android:textAllCaps="false"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/editTitle"
+                        app:layout_constraintEnd_toStartOf="@+id/editTitle"
+                        app:layout_constraintStart_toEndOf="@+id/back"
+                        app:layout_constraintTop_toTopOf="@+id/back" />
+
+                    <ImageView
+                        android:id="@+id/editTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:padding="8dp"
+                        android:src="@drawable/edit_text"
+                        app:layout_constraintBottom_toBottomOf="@+id/back"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/back" />
+
+                    <View
+                        android:id="@+id/deviceInfoView"
+                        android:layout_width="0dp"
+                        android:layout_height="180dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/grey_background"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/back" />
+
+                    <View
+                        android:id="@+id/emptyView"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        app:layout_constraintEnd_toEndOf="@+id/deviceInfoView"
+                        app:layout_constraintStart_toStartOf="@+id/deviceInfoView"
+                        app:layout_constraintTop_toBottomOf="@+id/deviceInfoView" />
+
+                    <View
+                        android:id="@+id/sensor1View"
+                        android:layout_width="0dp"
+                        android:layout_height="180dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="40dp"
+                        android:background="@drawable/grey_background"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/sensor2View"
+                        app:layout_constraintStart_toStartOf="@+id/emptyView"
+                        app:layout_constraintTop_toBottomOf="@+id/emptyView" />
+
+                    <TextView
+                        android:id="@+id/usSensorTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="7dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="130dp"
+                        android:fontFamily="@font/coda"
+                        android:text="Wave Detection"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/sensor1View"
+                        app:layout_constraintEnd_toEndOf="@+id/sensor1View"
+                        app:layout_constraintStart_toStartOf="@+id/sensor1View"
+                        app:layout_constraintTop_toBottomOf="@+id/bluebar" />
+
+                    <ImageView
+                        android:id="@+id/usSensorImg"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="120dp"
+                        android:layout_marginTop="125dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/ultrasonic_sensor"
+                        app:layout_constraintBottom_toBottomOf="@+id/sensor1View"
+                        app:layout_constraintEnd_toEndOf="@+id/sensor1View"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="@+id/sensor1View"
+                        app:layout_constraintTop_toBottomOf="@+id/bluebar"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <View
+                        android:id="@+id/sensor2View"
+                        android:layout_width="0dp"
+                        android:layout_height="180dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginBottom="40dp"
+                        android:background="@drawable/grey_background"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/emptyView"
+                        app:layout_constraintStart_toEndOf="@+id/sensor1View"
+                        app:layout_constraintTop_toBottomOf="@+id/emptyView" />
+
+                    <TextView
+                        android:id="@+id/moveDetectionTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="7dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="130dp"
+                        android:fontFamily="@font/coda"
+                        android:text="Movement Detection"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/sensor2View"
+                        app:layout_constraintEnd_toEndOf="@+id/sensor2View"
+                        app:layout_constraintStart_toStartOf="@+id/sensor2View"
+                        app:layout_constraintTop_toBottomOf="@+id/greenbar" />
+
+                    <ImageView
+                        android:id="@+id/moveDetectionImg"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="120dp"
+                        android:layout_marginTop="125dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/move_detection_sensor"
+                        app:layout_constraintBottom_toBottomOf="@+id/sensor2View"
+                        app:layout_constraintEnd_toEndOf="@+id/sensor2View"
+                        app:layout_constraintStart_toStartOf="@+id/sensor2View"
+                        app:layout_constraintTop_toBottomOf="@+id/greenbar" />
+
+                    <View
+                        android:id="@+id/bluebar"
+                        android:layout_width="80dp"
+                        android:layout_height="5dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="85dp"
+                        android:background="@drawable/blue_bar"
+                        app:layout_constraintBottom_toBottomOf="@+id/sensor1View"
+                        app:layout_constraintEnd_toEndOf="@+id/sensor1View"
+                        app:layout_constraintStart_toStartOf="@+id/sensor1View"
+                        app:layout_constraintTop_toTopOf="@+id/sensor1View"
+                        app:layout_constraintVertical_bias="0.08" />
+
+                    <View
+                        android:id="@+id/greenbar"
+                        android:layout_width="80dp"
+                        android:layout_height="5dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="85dp"
+                        android:background="@drawable/yellow_bar"
+                        app:layout_constraintBottom_toBottomOf="@+id/sensor2View"
+                        app:layout_constraintEnd_toEndOf="@+id/sensor2View"
+                        app:layout_constraintStart_toStartOf="@+id/sensor2View"
+                        app:layout_constraintTop_toTopOf="@+id/sensor2View"
+                        app:layout_constraintVertical_bias="0.08" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="@+id/deviceInfoView"
+                        app:layout_constraintEnd_toEndOf="@+id/deviceInfoView"
+                        app:layout_constraintStart_toStartOf="@+id/deviceInfoView"
+                        app:layout_constraintTop_toTopOf="@+id/deviceInfoView">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Device Information"
+                            android:textColor="#000000"
+                            android:textSize="18sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="0.2"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_weight="0.1"
+                                android:padding="6dp"
+                                android:text="Connectivity : "
+                                android:textColor="#000000" />
+
+                            <ImageView
+                                android:id="@+id/connectivityImg"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginEnd="150dp"
+                                android:layout_weight="1"
+                                android:src="@drawable/wifi" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="0.2"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_weight="0.1"
+                                android:padding="6dp"
+                                android:text="Status : "
+                                android:textColor="#000000" />
+
+                            <TextView
+                                android:id="@+id/statusTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginEnd="150dp"
+                                android:layout_weight="1"
+                                android:padding="6dp"
+                                android:text="Current status "
+                                android:textColor="#000000" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="0.2"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_weight="0.1"
+                                android:padding="6dp"
+                                android:text="Pairing status : "
+                                android:textColor="#000000" />
+
+                            <TextView
+                                android:id="@+id/pairTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginEnd="150dp"
+                                android:layout_weight="1"
+                                android:padding="6dp"
+                                android:text="Pair"
+                                android:textColor="#000000" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="0.2"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_weight="0.1"
+                                android:padding="6dp"
+                                android:text="Installation room : "
+                                android:textColor="#000000" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginEnd="150dp"
+                                android:layout_weight="1"
+                                android:padding="6dp"
+                                android:text="Room"
+                                android:textColor="#000000" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_remove"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="80dp"
+                    android:layout_marginEnd="80dp"
+                    android:fontFamily="@font/coda"
+                    android:text="Remove device"
+                    app:cornerRadius="32dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

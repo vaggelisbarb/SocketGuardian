@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "928893909614",
+    "project_id": "powermanagementdb",
+    "storage_bucket": "powermanagementdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928893909614:android:4fa10d3f141dc31fdb447f",
+        "android_client_info": {
+          "package_name": "com.example.powermmanagementapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHORMzWDbs0JandpnAxX7UzLcM9UKZY0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,78 @@
+package com.example.powermmanagementapplication.activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.example.powermmanagementapplication.R;
+import com.example.powermmanagementapplication.adapter.DeviceAdapter;
+import com.example.powermmanagementapplication.databinding.ActivityDevicesBinding;
+import com.example.powermmanagementapplication.domain.DeviceDomain;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
+
+public class DeviceActivity extends AppCompatActivity {
+
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+    private LinearLayout layoutLogout;
+
+    private ActivityDevicesBinding binding;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_devices);
+
+        binding = ActivityDevicesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        initDevicesRecyclerView();
+
+        layoutLogout = findViewById(R.id.layoutLogout);
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        if (user == null){
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        binding.addDeviceBtn.setOnClickListener((View.OnClickListener) view -> {
+           Intent intent = new Intent(getApplicationContext(), AddDeviceActivity.class);
+           startActivity(intent);
+           finish();
+        });
+
+
+        layoutLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(DeviceActivity.this, "Logging out", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void initDevicesRecyclerView(){
+        ArrayList<DeviceDomain> devices = new ArrayList<>();
+        devices.add(new DeviceDomain("1", "Living Room Socket_1", "Wi-Fi", "19-1-2024 11:33", true, true));
+        devices.add(new DeviceDomain("2", "Living Room Socket_2", "Bluetooth", "19-1-2024 12:20", true, true));
+        devices.add(new DeviceDomain("2", "Kitchen Socket_1", "Bluetooth", "19-1-2024 12:20", true, false));
+
+
+
+
+        binding.activeRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.activeRecyclerView.setAdapter(new DeviceAdapter(devices));
+    }
+}
