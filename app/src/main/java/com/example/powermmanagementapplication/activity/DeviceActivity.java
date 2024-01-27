@@ -2,8 +2,10 @@ package com.example.powermmanagementapplication.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,22 +46,16 @@ public class DeviceActivity extends AppCompatActivity {
             finish();
         }
 
-        binding.addDeviceBtn.setOnClickListener((View.OnClickListener) view -> {
-           Intent intent = new Intent(getApplicationContext(), AddDeviceActivity.class);
-           startActivity(intent);
-           finish();
+        binding.addDeviceBtn.setOnClickListener(view -> {
+            this.showNewDevicePopUpMenu(view);
         });
 
-
-        layoutLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(DeviceActivity.this, "Logging out", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        layoutLogout.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(DeviceActivity.this, "Logging out", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 
@@ -70,9 +66,14 @@ public class DeviceActivity extends AppCompatActivity {
         devices.add(new DeviceDomain("2", "Kitchen Socket_1", "Bluetooth", "19-1-2024 12:20", true, false));
 
 
-
-
         binding.activeRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.activeRecyclerView.setAdapter(new DeviceAdapter(devices));
+    }
+
+    private void showNewDevicePopUpMenu(View view){
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.add_device_menu, popupMenu.getMenu());
+        popupMenu.show();
     }
 }

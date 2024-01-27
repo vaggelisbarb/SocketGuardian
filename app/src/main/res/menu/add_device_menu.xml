@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/addBtDeviceItem"
+        android:title="Bluetooth Device"
+        android:icon="@drawable/bluetooth"/>
+    <item
+        android:id="@+id/addWifiDeviceItem"
+        android:title="Wi-Fi Device"
+        android:icon="@drawable/wifi"/>
+</menu>
