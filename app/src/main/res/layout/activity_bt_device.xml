@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".activity.AddDeviceActivity">
+    tools:context=".activity.BluetoothActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -67,11 +68,11 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:background="@drawable/grey_background"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp">
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/grey_background">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btSwitch"
@@ -79,8 +80,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:text="Enable Bluetooth"
                         android:fontFamily="@font/coda"
+                        android:text="Enable Bluetooth"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -113,76 +114,14 @@
                         android:id="@+id/bluetoothRecyclerView"
                         android:layout_width="0dp"
                         android:layout_height="150dp"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="40dp"
                         android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="60dp"
+                        android:layout_marginBottom="40dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/discoverableBtn"
                         app:layout_constraintTop_toBottomOf="@+id/discoverableBtn" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/grey_background">
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/wifiSwitch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/coda"
-                        android:text="Wi-Fi status "
-                        android:textSize="16sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/discoverableBtn2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/coda"
-                        android:text="Discoverable"
-                        app:cornerRadius="32dp"
-                        app:layout_constraintStart_toStartOf="@+id/wifiSwitch"
-                        app:layout_constraintTop_toBottomOf="@+id/wifiSwitch" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/findBtBtn2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/coda"
-                        android:text="Find devices"
-                        app:cornerRadius="32dp"
-                        android:layout_marginStart="30dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/discoverableBtn2"
-                        app:layout_constraintEnd_toEndOf="@+id/wifiRecyclerView"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@+id/discoverableBtn2"
-                        app:layout_constraintTop_toBottomOf="@+id/wifiSwitch"
-                        app:layout_constraintVertical_bias="1.0" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/wifiRecyclerView"
-                        android:layout_width="0dp"
-                        android:layout_height="150dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/discoverableBtn2"
-                        app:layout_constraintTop_toBottomOf="@+id/discoverableBtn2" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>

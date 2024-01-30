@@ -3,6 +3,7 @@ package com.example.powermmanagementapplication.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -47,7 +48,10 @@ public class DeviceActivity extends AppCompatActivity {
         }
 
         binding.addDeviceBtn.setOnClickListener(view -> {
-            this.showNewDevicePopUpMenu(view);
+            Intent addDeviceIntent = new Intent(getApplicationContext(), BluetoothActivity.class);
+            startActivity(addDeviceIntent);
+            finish();
+            //this.showNewDevicePopUpMenu(view);
         });
 
         layoutLogout.setOnClickListener(view -> {
@@ -74,6 +78,7 @@ public class DeviceActivity extends AppCompatActivity {
         PopupMenu popupMenu = new PopupMenu(this, view);
         MenuInflater inflater = popupMenu.getMenuInflater();
         inflater.inflate(R.menu.add_device_menu, popupMenu.getMenu());
+
         popupMenu.show();
     }
 }
