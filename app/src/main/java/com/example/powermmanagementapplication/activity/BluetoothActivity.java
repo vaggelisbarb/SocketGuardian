@@ -1,12 +1,18 @@
 package com.example.powermmanagementapplication.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -26,7 +32,7 @@ public class BluetoothActivity extends AppCompatActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     private static final int REQUEST_BLUETOOTH_PERMISSION = 2;
     private BluetoothAdapter bluetoothAdapter;
-
+    private ArrayAdapter<String> discoveredDevicesArrayAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,7 +72,38 @@ public class BluetoothActivity extends AppCompatActivity {
             }
         });
 
+
+        discoveredDevicesArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        binding.btDevicesListView.setAdapter(discoveredDevicesArrayAdapter);
+
+        binding.findBtBtn.setOnClickListener(view -> {
+
+            // Register for Bluetooth discovery broadcasts
+            IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+            registerReceiver(receiver, filter);
+
+            // Start Bluetooth discovery
+            bluetoothAdapter.startDiscovery();
+        });
+
     }
+
+    // Broadcast receiver for Bluetooth discovery
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+
+            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                @SuppressLint("MissingPermission") String deviceName = device.getName();
+                String deviceAddress = device.getAddress();
+                String discoveredDeviceInfo = deviceName + " - " + deviceAddress;
+
+                discoveredDevicesArrayAdapter.add(discoveredDeviceInfo);
+                discoveredDevicesArrayAdapter.notifyDataSetChanged();
+            }
+        }
+    };
 
     private void initBtLauncher() {
         // Initialize the ActivityResultLauncher

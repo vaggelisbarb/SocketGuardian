@@ -106,12 +106,12 @@
                         android:text="Find devices"
                         app:cornerRadius="32dp"
                         app:layout_constraintBottom_toBottomOf="@+id/discoverableBtn"
-                        app:layout_constraintEnd_toEndOf="@+id/bluetoothRecyclerView"
+                        app:layout_constraintEnd_toEndOf="@+id/btDevicesListView"
                         app:layout_constraintStart_toEndOf="@+id/discoverableBtn"
                         app:layout_constraintTop_toTopOf="@+id/discoverableBtn" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/bluetoothRecyclerView"
+                        <ListView
+                        android:id="@+id/btDevicesListView"
                         android:layout_width="0dp"
                         android:layout_height="150dp"
                         android:layout_marginTop="40dp"

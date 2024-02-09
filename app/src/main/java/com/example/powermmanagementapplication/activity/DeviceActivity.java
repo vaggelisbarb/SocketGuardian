@@ -25,20 +25,17 @@ public class DeviceActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseUser user;
-    private LinearLayout layoutLogout;
 
     private ActivityDevicesBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_devices);
-
         binding = ActivityDevicesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         initDevicesRecyclerView();
 
-        layoutLogout = findViewById(R.id.layoutLogout);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         if (user == null){
@@ -54,7 +51,7 @@ public class DeviceActivity extends AppCompatActivity {
             //this.showNewDevicePopUpMenu(view);
         });
 
-        layoutLogout.setOnClickListener(view -> {
+        binding.layoutLogout.setOnClickListener(view -> {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(DeviceActivity.this, "Logging out", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
