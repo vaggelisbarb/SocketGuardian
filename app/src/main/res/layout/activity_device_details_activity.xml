@@ -89,11 +89,9 @@
                     <View
                         android:id="@+id/sensor1View"
                         android:layout_width="0dp"
-                        android:layout_height="180dp"
+                        android:layout_height="150dp"
                         android:layout_marginEnd="20dp"
-                        android:layout_marginBottom="40dp"
                         android:background="@drawable/grey_background"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/sensor2View"
                         app:layout_constraintStart_toStartOf="@+id/emptyView"
                         app:layout_constraintTop_toBottomOf="@+id/emptyView" />
@@ -104,9 +102,9 @@
                         android:layout_height="0dp"
                         android:layout_marginStart="7dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="130dp"
+                        android:layout_marginBottom="100dp"
                         android:fontFamily="@font/coda"
-                        android:text="Wave Detection"
+                        android:text="Socket 1"
                         android:textColor="#000000"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -115,14 +113,16 @@
                         app:layout_constraintStart_toStartOf="@+id/sensor1View"
                         app:layout_constraintTop_toBottomOf="@+id/bluebar" />
 
+
                     <ImageView
                         android:id="@+id/usSensorImg"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="120dp"
-                        android:layout_marginTop="125dp"
+                        android:layout_marginTop="100dp"
                         android:layout_marginBottom="10dp"
-                        android:src="@drawable/ultrasonic_sensor"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/power_socket"
                         app:layout_constraintBottom_toBottomOf="@+id/sensor1View"
                         app:layout_constraintEnd_toEndOf="@+id/sensor1View"
                         app:layout_constraintHorizontal_bias="1.0"
@@ -133,11 +133,9 @@
                     <View
                         android:id="@+id/sensor2View"
                         android:layout_width="0dp"
-                        android:layout_height="180dp"
+                        android:layout_height="150dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginBottom="40dp"
                         android:background="@drawable/grey_background"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/emptyView"
                         app:layout_constraintStart_toEndOf="@+id/sensor1View"
                         app:layout_constraintTop_toBottomOf="@+id/emptyView" />
@@ -148,9 +146,9 @@
                         android:layout_height="0dp"
                         android:layout_marginStart="7dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="130dp"
+                        android:layout_marginBottom="100dp"
                         android:fontFamily="@font/coda"
-                        android:text="Movement Detection"
+                        android:text="Socket 2"
                         android:textColor="#000000"
                         android:textSize="14sp"
                         android:textStyle="bold"
@@ -164,13 +162,27 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="120dp"
-                        android:layout_marginTop="125dp"
+                        android:layout_marginTop="100dp"
                         android:layout_marginBottom="10dp"
-                        android:src="@drawable/move_detection_sensor"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/power_socket"
                         app:layout_constraintBottom_toBottomOf="@+id/sensor2View"
                         app:layout_constraintEnd_toEndOf="@+id/sensor2View"
                         app:layout_constraintStart_toStartOf="@+id/sensor2View"
                         app:layout_constraintTop_toBottomOf="@+id/greenbar" />
+
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/grey_background"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/sensor1View"
+                        app:layout_constraintHorizontal_bias="0.466"
+                        app:layout_constraintStart_toStartOf="@+id/sensor1View"
+                        app:layout_constraintTop_toBottomOf="@+id/sensor1View" />
 
                     <View
                         android:id="@+id/bluebar"
@@ -184,6 +196,19 @@
                         app:layout_constraintStart_toStartOf="@+id/sensor1View"
                         app:layout_constraintTop_toTopOf="@+id/sensor1View"
                         app:layout_constraintVertical_bias="0.08" />
+
+                    <View
+                        android:id="@+id/purplebar"
+                        android:layout_width="80dp"
+                        android:layout_height="5dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="85dp"
+                        android:background="@drawable/purple_bar"
+                        app:layout_constraintBottom_toBottomOf="@+id/view2"
+                        app:layout_constraintEnd_toEndOf="@+id/view2"
+                        app:layout_constraintStart_toStartOf="@+id/view2"
+                        app:layout_constraintTop_toTopOf="@+id/view2"
+                        app:layout_constraintVertical_bias="0.08"/>
 
                     <View
                         android:id="@+id/greenbar"
@@ -337,6 +362,11 @@
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_remove"
                     android:layout_width="match_parent"
@@ -348,6 +378,7 @@
                     app:cornerRadius="32dp" />
 
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 

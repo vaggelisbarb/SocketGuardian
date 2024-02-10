@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
+
 public class DeviceActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
@@ -62,9 +63,9 @@ public class DeviceActivity extends AppCompatActivity {
 
     private void initDevicesRecyclerView(){
         ArrayList<DeviceDomain> devices = new ArrayList<>();
-        devices.add(new DeviceDomain("1", "Living Room Socket_1", "Wi-Fi", "19-1-2024 11:33", true, true));
-        devices.add(new DeviceDomain("2", "Living Room Socket_2", "Bluetooth", "19-1-2024 12:20", true, true));
-        devices.add(new DeviceDomain("2", "Kitchen Socket_1", "Bluetooth", "19-1-2024 12:20", true, false));
+        devices.add(new DeviceDomain("1", "Kid's room 1", "Wi-Fi", "19-1-2024 11:33", true, true));
+        devices.add(new DeviceDomain("2", "Kid's room 2", "Bluetooth", "19-1-2024 12:20", true, true));
+        devices.add(new DeviceDomain("2", "Kid's room 3", "Bluetooth", "19-1-2024 12:20", true, false));
 
 
         binding.activeRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
