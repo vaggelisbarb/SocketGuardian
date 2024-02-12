@@ -25,8 +25,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <!-- Back button -->
                     <ImageView
-                        android:id="@+id/back"
+                        android:id="@+id/backButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -37,6 +38,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <!-- Device title -->
                     <EditText
                         android:id="@+id/titleTextView"
                         android:layout_width="wrap_content"
@@ -52,9 +54,10 @@
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="@+id/editTitle"
                         app:layout_constraintEnd_toStartOf="@+id/editTitle"
-                        app:layout_constraintStart_toEndOf="@+id/back"
-                        app:layout_constraintTop_toTopOf="@+id/back" />
+                        app:layout_constraintStart_toEndOf="@+id/backButton"
+                        app:layout_constraintTop_toTopOf="@+id/backButton" />
 
+                    <!-- Edit icon -->
                     <ImageView
                         android:id="@+id/editTitle"
                         android:layout_width="wrap_content"
@@ -62,10 +65,11 @@
                         android:layout_marginEnd="16dp"
                         android:padding="8dp"
                         android:src="@drawable/edit_text"
-                        app:layout_constraintBottom_toBottomOf="@+id/back"
+                        app:layout_constraintBottom_toBottomOf="@+id/backButton"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/back" />
+                        app:layout_constraintTop_toTopOf="@+id/backButton" />
 
+                    <!-- Device info view -->
                     <View
                         android:id="@+id/deviceInfoView"
                         android:layout_width="0dp"
@@ -76,28 +80,47 @@
                         android:background="@drawable/grey_background"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/back" />
+                        app:layout_constraintTop_toBottomOf="@+id/backButton" />
 
+                    <!-- Empty space -->
                     <View
-                        android:id="@+id/emptyView"
+                        android:id="@+id/emptyView1"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         app:layout_constraintEnd_toEndOf="@+id/deviceInfoView"
                         app:layout_constraintStart_toStartOf="@+id/deviceInfoView"
                         app:layout_constraintTop_toBottomOf="@+id/deviceInfoView" />
 
+                    <!-- Socket 1 view -->
                     <View
-                        android:id="@+id/sensor1View"
+                        android:id="@+id/socket1View"
+                        android:clickable="true"
                         android:layout_width="0dp"
                         android:layout_height="150dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/grey_background"
-                        app:layout_constraintEnd_toStartOf="@+id/sensor2View"
-                        app:layout_constraintStart_toStartOf="@+id/emptyView"
-                        app:layout_constraintTop_toBottomOf="@+id/emptyView" />
+                        app:layout_constraintEnd_toStartOf="@+id/socket2View"
+                        app:layout_constraintStart_toStartOf="@+id/emptyView1"
+                        app:layout_constraintTop_toBottomOf="@+id/emptyView1" />
 
+                    <!-- Socket 3 view -->
+                    <View
+                        android:id="@+id/socket3View"
+                        android:clickable="true"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/grey_background"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/socket1View"
+                        app:layout_constraintHorizontal_bias="0.466"
+                        app:layout_constraintStart_toStartOf="@+id/socket1View"
+                        app:layout_constraintTop_toBottomOf="@+id/socket1View" />
+
+                    <!-- Socket 1 text -->
                     <TextView
-                        android:id="@+id/usSensorTextView"
+                        android:id="@+id/socket1TextView"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="7dp"
@@ -108,40 +131,76 @@
                         android:textColor="#000000"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/sensor1View"
-                        app:layout_constraintEnd_toEndOf="@+id/sensor1View"
-                        app:layout_constraintStart_toStartOf="@+id/sensor1View"
+                        app:layout_constraintBottom_toBottomOf="@+id/socket1View"
+                        app:layout_constraintEnd_toEndOf="@+id/socket1View"
+                        app:layout_constraintStart_toStartOf="@+id/socket1View"
                         app:layout_constraintTop_toBottomOf="@+id/bluebar" />
 
+                    <!-- Socket 3 text -->
+                    <TextView
+                        android:id="@+id/socket3TextView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="7dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="100dp"
+                        android:fontFamily="@font/coda"
+                        android:text="Socket 3"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/socket3View"
+                        app:layout_constraintEnd_toEndOf="@+id/socket3View"
+                        app:layout_constraintStart_toStartOf="@+id/socket3View"
+                        app:layout_constraintTop_toBottomOf="@+id/purplebar" />
 
+                    <!-- Power image for socket 1 -->
                     <ImageView
-                        android:id="@+id/usSensorImg"
+                        android:id="@+id/powerImage1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="120dp"
                         android:layout_marginTop="100dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/power_socket"
-                        app:layout_constraintBottom_toBottomOf="@+id/sensor1View"
-                        app:layout_constraintEnd_toEndOf="@+id/sensor1View"
+                        android:src="@drawable/green_electricity"
+                        app:layout_constraintBottom_toBottomOf="@+id/socket1View"
+                        app:layout_constraintEnd_toEndOf="@+id/socket1View"
                         app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toStartOf="@+id/sensor1View"
+                        app:layout_constraintStart_toStartOf="@+id/socket1View"
                         app:layout_constraintTop_toBottomOf="@+id/bluebar"
                         app:layout_constraintVertical_bias="1.0" />
 
+                    <!-- Power image for socket 3 -->
+                    <ImageView
+                        android:id="@+id/powerImage3"
+                        android:layout_height="0dp"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="120dp"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/red_electricity"
+                        app:layout_constraintBottom_toBottomOf="@+id/socket3View"
+                        app:layout_constraintEnd_toEndOf="@+id/socket3View"
+                        app:layout_constraintStart_toStartOf="@+id/socket3View"
+                        app:layout_constraintTop_toBottomOf="@+id/purplebar" />
+
+                    <!-- Socket 2 view -->
                     <View
-                        android:id="@+id/sensor2View"
+                        android:id="@+id/socket2View"
+                        android:clickable="true"
                         android:layout_width="0dp"
                         android:layout_height="150dp"
                         android:layout_marginStart="20dp"
                         android:background="@drawable/grey_background"
-                        app:layout_constraintEnd_toEndOf="@+id/emptyView"
-                        app:layout_constraintStart_toEndOf="@+id/sensor1View"
-                        app:layout_constraintTop_toBottomOf="@+id/emptyView" />
+                        app:layout_constraintEnd_toEndOf="@+id/emptyView1"
+                        app:layout_constraintStart_toEndOf="@+id/socket1View"
+                        app:layout_constraintTop_toBottomOf="@+id/emptyView1" />
 
+                    <!-- Socket 2 text -->
                     <TextView
-                        android:id="@+id/moveDetectionTextView"
+                        android:id="@+id/socket2TextView"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="7dp"
@@ -152,38 +211,27 @@
                         android:textColor="#000000"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/sensor2View"
-                        app:layout_constraintEnd_toEndOf="@+id/sensor2View"
-                        app:layout_constraintStart_toStartOf="@+id/sensor2View"
+                        app:layout_constraintBottom_toBottomOf="@+id/socket2View"
+                        app:layout_constraintEnd_toEndOf="@+id/socket2View"
+                        app:layout_constraintStart_toStartOf="@+id/socket2View"
                         app:layout_constraintTop_toBottomOf="@+id/greenbar" />
 
+                    <!-- Power image for socket 2 -->
                     <ImageView
-                        android:id="@+id/moveDetectionImg"
+                        android:id="@+id/powerImage2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="120dp"
                         android:layout_marginTop="100dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/power_socket"
-                        app:layout_constraintBottom_toBottomOf="@+id/sensor2View"
-                        app:layout_constraintEnd_toEndOf="@+id/sensor2View"
-                        app:layout_constraintStart_toStartOf="@+id/sensor2View"
+                        android:src="@drawable/green_electricity"
+                        app:layout_constraintBottom_toBottomOf="@+id/socket2View"
+                        app:layout_constraintEnd_toEndOf="@+id/socket2View"
+                        app:layout_constraintStart_toStartOf="@+id/socket2View"
                         app:layout_constraintTop_toBottomOf="@+id/greenbar" />
 
-                    <View
-                        android:id="@+id/view2"
-                        android:layout_width="0dp"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/grey_background"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/sensor1View"
-                        app:layout_constraintHorizontal_bias="0.466"
-                        app:layout_constraintStart_toStartOf="@+id/sensor1View"
-                        app:layout_constraintTop_toBottomOf="@+id/sensor1View" />
-
+                    <!-- Color bars -->
                     <View
                         android:id="@+id/bluebar"
                         android:layout_width="80dp"
@@ -191,10 +239,10 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="85dp"
                         android:background="@drawable/blue_bar"
-                        app:layout_constraintBottom_toBottomOf="@+id/sensor1View"
-                        app:layout_constraintEnd_toEndOf="@+id/sensor1View"
-                        app:layout_constraintStart_toStartOf="@+id/sensor1View"
-                        app:layout_constraintTop_toTopOf="@+id/sensor1View"
+                        app:layout_constraintBottom_toBottomOf="@+id/socket1View"
+                        app:layout_constraintEnd_toEndOf="@+id/socket1View"
+                        app:layout_constraintStart_toStartOf="@+id/socket1View"
+                        app:layout_constraintTop_toTopOf="@+id/socket1View"
                         app:layout_constraintVertical_bias="0.08" />
 
                     <View
@@ -204,11 +252,11 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="85dp"
                         android:background="@drawable/purple_bar"
-                        app:layout_constraintBottom_toBottomOf="@+id/view2"
-                        app:layout_constraintEnd_toEndOf="@+id/view2"
-                        app:layout_constraintStart_toStartOf="@+id/view2"
-                        app:layout_constraintTop_toTopOf="@+id/view2"
-                        app:layout_constraintVertical_bias="0.08"/>
+                        app:layout_constraintBottom_toBottomOf="@+id/socket3View"
+                        app:layout_constraintEnd_toEndOf="@+id/socket3View"
+                        app:layout_constraintStart_toStartOf="@+id/socket3View"
+                        app:layout_constraintTop_toTopOf="@+id/socket3View"
+                        app:layout_constraintVertical_bias="0.08" />
 
                     <View
                         android:id="@+id/greenbar"
@@ -217,12 +265,13 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="85dp"
                         android:background="@drawable/yellow_bar"
-                        app:layout_constraintBottom_toBottomOf="@+id/sensor2View"
-                        app:layout_constraintEnd_toEndOf="@+id/sensor2View"
-                        app:layout_constraintStart_toStartOf="@+id/sensor2View"
-                        app:layout_constraintTop_toTopOf="@+id/sensor2View"
+                        app:layout_constraintBottom_toBottomOf="@+id/socket2View"
+                        app:layout_constraintEnd_toEndOf="@+id/socket2View"
+                        app:layout_constraintStart_toStartOf="@+id/socket2View"
+                        app:layout_constraintTop_toTopOf="@+id/socket2View"
                         app:layout_constraintVertical_bias="0.08" />
 
+                    <!-- Device information layout -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -239,9 +288,11 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="5dp"
                             android:text="Device Information"
+                            android:fontFamily="@font/coda"
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
+                        <!-- Connectivity -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
@@ -256,6 +307,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_weight="0.1"
+                                android:fontFamily="@font/coda"
                                 android:padding="6dp"
                                 android:text="Connectivity : "
                                 android:textColor="#000000" />
@@ -270,6 +322,7 @@
                                 android:src="@drawable/wifi" />
                         </LinearLayout>
 
+                        <!-- Status -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
@@ -284,6 +337,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_weight="0.1"
+                                android:fontFamily="@font/coda"
                                 android:padding="6dp"
                                 android:text="Status : "
                                 android:textColor="#000000" />
@@ -295,11 +349,13 @@
                                 android:layout_gravity="start"
                                 android:layout_marginEnd="150dp"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/coda"
                                 android:padding="6dp"
                                 android:text="Current status "
                                 android:textColor="#000000" />
                         </LinearLayout>
 
+                        <!-- Pairing status -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
@@ -314,6 +370,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_weight="0.1"
+                                android:fontFamily="@font/coda"
                                 android:padding="6dp"
                                 android:text="Pairing status : "
                                 android:textColor="#000000" />
@@ -325,11 +382,13 @@
                                 android:layout_gravity="start"
                                 android:layout_marginEnd="150dp"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/coda"
                                 android:padding="6dp"
                                 android:text="Pair"
                                 android:textColor="#000000" />
                         </LinearLayout>
 
+                        <!-- Installation room -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
@@ -344,6 +403,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_weight="0.1"
+                                android:fontFamily="@font/coda"
                                 android:padding="6dp"
                                 android:text="Installation room : "
                                 android:textColor="#000000" />
@@ -354,6 +414,7 @@
                                 android:layout_gravity="start"
                                 android:layout_marginEnd="150dp"
                                 android:layout_weight="1"
+                                android:fontFamily="@font/coda"
                                 android:padding="6dp"
                                 android:text="Room"
                                 android:textColor="#000000" />
@@ -362,11 +423,13 @@
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <!-- Empty view -->
                 <View
-                    android:id="@+id/view"
+                    android:id="@+id/emptyView2"
                     android:layout_width="match_parent"
                     android:layout_height="20dp" />
 
+                <!-- Remove device button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_remove"
                     android:layout_width="match_parent"

@@ -42,7 +42,6 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
         binding.connectivityTextView.setText(devices.get(position).getConnectivity());
         binding.updatedTextView.setText(devices.get(position).getLastUpdate());
         binding.pairedTextView.setText(devices.get(position).initPairingStatus());
-        binding.statusText.setText(devices.get(position).initEnableStatus());
 
 
         int drawableResourced = holder.itemView.getResources().getIdentifier(devices.get(position).getPicUrl(),

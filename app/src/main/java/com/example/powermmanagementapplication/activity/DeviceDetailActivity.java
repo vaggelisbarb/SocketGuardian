@@ -28,7 +28,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
         getBundles();
 
         // Back button functionality
-        binding.back.setOnClickListener(view -> {
+        binding.backButton.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), DeviceActivity.class);
             startActivity(intent);
             finish();
