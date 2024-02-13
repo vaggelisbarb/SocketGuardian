@@ -52,7 +52,6 @@ public class DeviceDetailActivity extends AppCompatActivity {
                 .into(binding.connectivityImg);
 
         binding.titleTextView.setText(deviceObj.getDeviceName());
-        binding.pairTextView.setText(deviceObj.initPairingStatus());
         binding.statusTextView.setText(deviceObj.initEnableStatus());
     }
 }

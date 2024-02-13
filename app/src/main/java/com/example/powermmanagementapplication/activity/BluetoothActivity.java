@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -89,10 +90,6 @@ public class BluetoothActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         REQUEST_FINE_LOCATION_PERMISSION);
-            } else {
-                // Show progress bar
-                binding.progressBar.setVisibility(View.VISIBLE);
-                startBluetoothDiscovery();
             }
         });
     }
@@ -131,16 +128,36 @@ public class BluetoothActivity extends AppCompatActivity {
         enableBluetoothLauncher.launch(enableBtIntent);
     }
 
-    private void startBluetoothDiscovery() {
+
+    private void performBluetoothDiscovery() {
         // Register for Bluetooth discovery broadcasts
         if (!isReceiverRegistered) {
-            IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-            registerReceiver(receiver, filter);
-            isReceiverRegistered = true;
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+            filter.addAction(BluetoothDevice.ACTION_FOUND);
+
+            try {
+                registerReceiver(receiver, filter);
+                isReceiverRegistered = true;
+                Log.i("Receiver Registration", "Receiver registered successfully");
+            }catch (Exception e) {
+                isReceiverRegistered = false;
+                Log.e("Receiver Registration", "Failed to register BroadcastReceiver: " + e.getMessage());
+            }
         }
 
         // Start Bluetooth discovery
-        bluetoothAdapter.startDiscovery();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission not granted, request it from the user
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_FINE_LOCATION_PERMISSION);
+        } else {
+            // Permission granted, start Bluetooth discovery
+            bluetoothAdapter.startDiscovery();
+        }
     }
 
     // Broadcast receiver for Bluetooth discovery
@@ -148,14 +165,28 @@ public class BluetoothActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
-            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+                binding.progressBar.setVisibility(View.VISIBLE);
+                // Discovery process has started
+                Log.i("Broadcast Receiver", "Discovery started");
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                binding.progressBar.setVisibility(View.GONE);
+                // Discovery process has finished
+                Log.i("Broadcast Receiver", "Discovery finished");
+            }else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                // A new bluetooth device has been discovered
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                @SuppressLint("MissingPermission") String deviceName = device.getName();
-                String deviceAddress = device.getAddress();
-                String discoveredDeviceInfo = deviceName + " - " + deviceAddress;
+                if (device!=null ){
+                    @SuppressLint("MissingPermission")
+                    String deviceName = device.getName();
+                    String deviceAddress = device.getAddress();
+                    String discoveredDeviceInfo = deviceName + " - " + deviceAddress;
 
-                discoveredDevicesList.add(discoveredDeviceInfo);
-                discoveredDevicesArrayAdapter.notifyDataSetChanged();
+                    Log.i("Broadcast Receiver", discoveredDeviceInfo);
+
+                    discoveredDevicesList.add(discoveredDeviceInfo);
+                    discoveredDevicesArrayAdapter.notifyDataSetChanged();
+                }
             }
         }
     };
@@ -175,9 +206,11 @@ public class BluetoothActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_FINE_LOCATION_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.i("Permission", "Location permission granted");
                 // Location permission granted, start Bluetooth discovery
-                startBluetoothDiscovery();
+                performBluetoothDiscovery();
             } else {
+                Log.i("Permission", "Location permission denied");
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
             }
         }
