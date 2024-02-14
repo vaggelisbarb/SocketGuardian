@@ -45,6 +45,8 @@ public class BluetoothActivity extends AppCompatActivity {
     private List<String> discoveredDevicesList;
     private boolean isReceiverRegistered = false;
     private BluetoothSocket bluetoothSocket;
+    private BroadcastReceiver receiver;
+    private IntentFilter filter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +58,78 @@ public class BluetoothActivity extends AppCompatActivity {
 
         initBtLauncher();
         setListeners();
+
+        /**
+         * Broadcast receiver for Bluetooth discovery
+         */
+        receiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+
+                Log.e("Check", "HERE");
+
+                if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+                    binding.progressBar.setVisibility(View.VISIBLE);
+                    // Discovery process has started
+                    Log.i("Broadcast Receiver", "Discovery started");
+                } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+                    binding.progressBar.setVisibility(View.GONE);
+                    // Discovery process has finished
+                    Log.i("Broadcast Receiver", "Discovery finished");
+
+                }else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                    // A new bluetooth device has been discovered
+                    BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                    if (device!=null ){
+                        @SuppressLint("MissingPermission")
+                        String deviceName = device.getName();
+                        String deviceAddress = device.getAddress();
+                        String discoveredDeviceInfo = deviceName + " - " + deviceAddress;
+
+                        Log.i("Broadcast Receiver", discoveredDeviceInfo);
+
+                        discoveredDevicesList.add(discoveredDeviceInfo);
+                        discoveredDevicesArrayAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        };
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (!isReceiverRegistered) {
+            filter = new IntentFilter();
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+            filter.addAction(BluetoothDevice.ACTION_FOUND);
+
+            try {
+                registerReceiver(receiver, filter);
+                isReceiverRegistered = true;
+                Log.i("Receiver Registration", "Receiver registered successfully");
+            } catch (Exception e) {
+                isReceiverRegistered = false;
+                Log.e("Receiver Registration", "Failed to register BroadcastReceiver: " + e.getMessage());
+            }
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Unregister the BroadcastReceiver when the activity is paused
+        if (isReceiverRegistered) {
+            unregisterReceiver(receiver);
+            isReceiverRegistered = false;
+            Log.e("Pause", "Receiver unregistered");
+        }
     }
 
     private void setListeners() {
@@ -174,69 +248,12 @@ public class BluetoothActivity extends AppCompatActivity {
         // Register for Bluetooth discovery broadcasts
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            if (!isReceiverRegistered) {
-                IntentFilter filter = new IntentFilter();
-                filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-                filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-                filter.addAction(BluetoothDevice.ACTION_FOUND);
-
-                try {
-                    registerReceiver(receiver, filter);
-                    isReceiverRegistered = true;
-                    Log.i("Receiver Registration", "Receiver registered successfully");
-                } catch (Exception e) {
-                    isReceiverRegistered = false;
-                    Log.e("Receiver Registration", "Failed to register BroadcastReceiver: " + e.getMessage());
-                }
-            }
             // Permission granted, start Bluetooth discovery
+            Log.i("Bluetooth Adapter", String.valueOf(bluetoothAdapter.isEnabled()));
             bluetoothAdapter.startDiscovery();
         } else {
             // Permission not granted, handle accordingly (e.g., show a message to the user)
             Log.e("Permission", "Fine location permission not granted");
-        }
-    }
-
-    /**
-     * Broadcast receiver for Bluetooth discovery
-     */
-    private final BroadcastReceiver receiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-
-            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
-                binding.progressBar.setVisibility(View.VISIBLE);
-                // Discovery process has started
-                Log.i("Broadcast Receiver", "Discovery started");
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                binding.progressBar.setVisibility(View.GONE);
-                // Discovery process has finished
-                Log.i("Broadcast Receiver", "Discovery finished");
-            }else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                // A new bluetooth device has been discovered
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if (device!=null ){
-                    @SuppressLint("MissingPermission")
-                    String deviceName = device.getName();
-                    String deviceAddress = device.getAddress();
-                    String discoveredDeviceInfo = deviceName + " - " + deviceAddress;
-
-                    Log.i("Broadcast Receiver", discoveredDeviceInfo);
-
-                    discoveredDevicesList.add(discoveredDeviceInfo);
-                    discoveredDevicesArrayAdapter.notifyDataSetChanged();
-                }
-            }
-        }
-    };
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Unregister the BroadcastReceiver only if it has been registered previously
-        if (isReceiverRegistered) {
-            unregisterReceiver(receiver);
-            isReceiverRegistered = false;
         }
     }
 
