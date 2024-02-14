@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,9 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.powermmanagementapplication.R;
 import com.example.powermmanagementapplication.databinding.ActivityBtDeviceBinding;
 
 import java.io.IOException;
@@ -42,6 +39,7 @@ public class BluetoothActivity extends AppCompatActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     private static final int REQUEST_BLUETOOTH_PERMISSION = 2;
     private static final int REQUEST_FINE_LOCATION_PERMISSION = 3;
+    private static final int REQUEST_LOCATION_AND_BLUETOOTH_PERMISSION = 4;
     private BluetoothAdapter bluetoothAdapter;
     private ArrayAdapter<String> discoveredDevicesArrayAdapter;
     private List<String> discoveredDevicesList;
@@ -89,13 +87,7 @@ public class BluetoothActivity extends AppCompatActivity {
         binding.btDevicesListView.setAdapter(discoveredDevicesArrayAdapter);
 
         binding.searchDevicesButton.setOnClickListener(view -> {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                // Permission not granted, request it
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_FINE_LOCATION_PERMISSION);
-            }
+            requestLocationAndBtScanPermission();
         });
 
         binding.btDevicesListView.setOnItemClickListener(((adapterView, view, position, id) -> {
@@ -154,6 +146,25 @@ public class BluetoothActivity extends AppCompatActivity {
         enableBluetoothLauncher.launch(enableBtIntent);
     }
 
+    /**
+     * Requesting fine location permission from user
+     */
+    private void requestLocationAndBtScanPermission() {
+        // Check if the app has fine location and Bluetooth permissions
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN)
+                        != PackageManager.PERMISSION_GRANTED) {
+            // Request fine location and Bluetooth permissions
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.BLUETOOTH_SCAN},
+                    REQUEST_LOCATION_AND_BLUETOOTH_PERMISSION);
+        } else {
+            // Fine location and Bluetooth permissions already granted, perform Bluetooth discovery
+            performBluetoothDiscovery();
+        }
+
+    }
 
     /**
      * Requesting location permission from the user.
@@ -161,32 +172,28 @@ public class BluetoothActivity extends AppCompatActivity {
      */
     private void performBluetoothDiscovery() {
         // Register for Bluetooth discovery broadcasts
-        if (!isReceiverRegistered) {
-            IntentFilter filter = new IntentFilter();
-            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-            filter.addAction(BluetoothDevice.ACTION_FOUND);
-
-            try {
-                registerReceiver(receiver, filter);
-                isReceiverRegistered = true;
-                Log.i("Receiver Registration", "Receiver registered successfully");
-            }catch (Exception e) {
-                isReceiverRegistered = false;
-                Log.e("Receiver Registration", "Failed to register BroadcastReceiver: " + e.getMessage());
-            }
-        }
-
-        // Start Bluetooth discovery
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission not granted, request it from the user
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    REQUEST_FINE_LOCATION_PERMISSION);
-        } else {
+                == PackageManager.PERMISSION_GRANTED) {
+            if (!isReceiverRegistered) {
+                IntentFilter filter = new IntentFilter();
+                filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+                filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+                filter.addAction(BluetoothDevice.ACTION_FOUND);
+
+                try {
+                    registerReceiver(receiver, filter);
+                    isReceiverRegistered = true;
+                    Log.i("Receiver Registration", "Receiver registered successfully");
+                } catch (Exception e) {
+                    isReceiverRegistered = false;
+                    Log.e("Receiver Registration", "Failed to register BroadcastReceiver: " + e.getMessage());
+                }
+            }
             // Permission granted, start Bluetooth discovery
             bluetoothAdapter.startDiscovery();
+        } else {
+            // Permission not granted, handle accordingly (e.g., show a message to the user)
+            Log.e("Permission", "Fine location permission not granted");
         }
     }
 
@@ -243,17 +250,24 @@ public class BluetoothActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_FINE_LOCATION_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.i("Permission", "Location permission granted");
-                // Location permission granted, start Bluetooth discovery
+        if (requestCode == REQUEST_LOCATION_AND_BLUETOOTH_PERMISSION) {
+            boolean locationPermissionGranted = grantResults.length > 0 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED;
+            boolean bluetoothPermissionGranted = grantResults.length > 1 &&
+                    grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+            if (locationPermissionGranted && bluetoothPermissionGranted) {
+                Log.i("Permission", "Location and Bluetooth Scan permissions granted");
+                // Location and Bluetooth permissions granted, start Bluetooth discovery
                 performBluetoothDiscovery();
             } else {
-                Log.i("Permission", "Location permission denied");
-                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+                Log.i("Permission", "Location and/or Bluetooth Scan permissions denied");
+                Toast.makeText(this, "Location and/or Bluetooth Scan permissions denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
+
 
     /**
      * @param bluetoothDevice The selected device to establish a bluetooth connection with
