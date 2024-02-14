@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,10 +27,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.powermmanagementapplication.R;
 import com.example.powermmanagementapplication.databinding.ActivityBtDeviceBinding;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class BluetoothActivity extends AppCompatActivity {
 
@@ -42,6 +46,7 @@ public class BluetoothActivity extends AppCompatActivity {
     private ArrayAdapter<String> discoveredDevicesArrayAdapter;
     private List<String> discoveredDevicesList;
     private boolean isReceiverRegistered = false;
+    private BluetoothSocket bluetoothSocket;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,6 +97,20 @@ public class BluetoothActivity extends AppCompatActivity {
                         REQUEST_FINE_LOCATION_PERMISSION);
             }
         });
+
+        binding.btDevicesListView.setOnItemClickListener(((adapterView, view, position, id) -> {
+            String selectedItem = discoveredDevicesArrayAdapter.getItem(position);
+
+            String[] parts = selectedItem.split(" - ");
+            String deviceName = parts[0];
+            String deviceAddress = parts[1];
+
+            BluetoothDevice selectedBtDevice = bluetoothAdapter.getRemoteDevice(deviceAddress);
+            if (selectedBtDevice != null) {
+                connectToDevice(selectedBtDevice);
+            }
+
+        }));
     }
 
     private void initBtLauncher() {
@@ -109,6 +128,10 @@ public class BluetoothActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Requesting bluetooth permissions from the user.
+     * If it's granted enabling bluetooth process is executed
+     */
     private void requestBluetoothPermission() {
         // Check if the app has Bluetooth permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH)
@@ -123,12 +146,19 @@ public class BluetoothActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Enables device's bluetooth
+     */
     private void enableBluetooth() {
         Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
         enableBluetoothLauncher.launch(enableBtIntent);
     }
 
 
+    /**
+     * Requesting location permission from the user.
+     * If it's granted bluetooth discovery process is executed
+     */
     private void performBluetoothDiscovery() {
         // Register for Bluetooth discovery broadcasts
         if (!isReceiverRegistered) {
@@ -160,7 +190,9 @@ public class BluetoothActivity extends AppCompatActivity {
         }
     }
 
-    // Broadcast receiver for Bluetooth discovery
+    /**
+     * Broadcast receiver for Bluetooth discovery
+     */
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -201,6 +233,13 @@ public class BluetoothActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @param requestCode  The request code passed in
+     * @param permissions  The requested permissions. Never null.
+     * @param grantResults The grant results for the corresponding permissions
+     *                     which is either {@link android.content.pm.PackageManager#PERMISSION_GRANTED}
+     *                     or {@link android.content.pm.PackageManager#PERMISSION_DENIED}. Never null.
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -214,5 +253,38 @@ public class BluetoothActivity extends AppCompatActivity {
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    /**
+     * @param bluetoothDevice The selected device to establish a bluetooth connection with
+     */
+    @SuppressLint("MissingPermission")
+    private void connectToDevice(BluetoothDevice bluetoothDevice) {
+        // Create a BluetoothSocket for the device
+        try {
+            // TODO : Change UUID to our ESP32's UUID
+            bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"));
+        } catch (IOException e) {
+            Log.e("Connection", e.getMessage());
+            return;
+        }
+
+        new Thread(() -> {
+            try {
+                bluetoothSocket.connect();
+                Log.i("Connection", "Connected to device : " + bluetoothDevice.getName());
+                // TODO : Start communicating with the ESP32 / Communication protocol goes here ...
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e("Connection", e.getMessage());
+                try {
+                    bluetoothSocket.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    Log.d("Connection", "Closing bluetooth socket");
+                }
+            }
+        }).start();
+
     }
 }

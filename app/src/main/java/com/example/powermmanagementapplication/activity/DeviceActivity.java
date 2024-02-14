@@ -45,6 +45,10 @@ public class DeviceActivity extends AppCompatActivity {
             finish();
         }
 
+        setListeners();
+    }
+
+    private void setListeners() {
         binding.addDeviceBtn.setOnClickListener(view -> {
             Intent addDeviceIntent = new Intent(getApplicationContext(), BluetoothActivity.class);
             startActivity(addDeviceIntent);
@@ -65,13 +69,16 @@ public class DeviceActivity extends AppCompatActivity {
         ArrayList<DeviceDomain> devices = new ArrayList<>();
         devices.add(new DeviceDomain("1", "Kid's room 1", "Wi-Fi", "19-1-2024 11:33", true, true));
         devices.add(new DeviceDomain("2", "Kid's room 2", "Bluetooth", "19-1-2024 12:20", true, true));
-        devices.add(new DeviceDomain("2", "Kid's room 3", "Bluetooth", "19-1-2024 12:20", true, false));
+        devices.add(new DeviceDomain("3", "Kid's room 3", "Bluetooth", "19-1-2024 12:20", true, false));
+        devices.add(new DeviceDomain("4", "Kid's room 4", "Bluetooth", "14-2-2024 21:20", false, false));
+        devices.add(new DeviceDomain("5", "Kid's room 5", "Wi-Fi", "14-2-2024 23:20", false, false));
 
 
         binding.activeRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.activeRecyclerView.setAdapter(new DeviceAdapter(devices));
     }
 
+    /*
     private void showNewDevicePopUpMenu(View view){
         PopupMenu popupMenu = new PopupMenu(this, view);
         MenuInflater inflater = popupMenu.getMenuInflater();
@@ -79,4 +86,5 @@ public class DeviceActivity extends AppCompatActivity {
 
         popupMenu.show();
     }
+     */
 }

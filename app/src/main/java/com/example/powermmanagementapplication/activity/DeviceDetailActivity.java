@@ -12,12 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.powermmanagementapplication.R;
 import com.example.powermmanagementapplication.databinding.ActivityDeviceDetailsActivityBinding;
+import com.example.powermmanagementapplication.databinding.ActivityDevicesBinding;
 import com.example.powermmanagementapplication.domain.DeviceDomain;
 
 public class DeviceDetailActivity extends AppCompatActivity {
 
     private ActivityDeviceDetailsActivityBinding binding;
     private DeviceDomain deviceObj;
+    private ActivityDevicesBinding activityDevicesBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,7 +28,11 @@ public class DeviceDetailActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         getBundles();
+        setListeners();
 
+    }
+
+    private void setListeners() {
         // Back button functionality
         binding.backButton.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), DeviceActivity.class);
