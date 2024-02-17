@@ -52,19 +52,20 @@
                         android:textAllCaps="false"
                         android:textColor="#000000"
                         android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/editTitle"
-                        app:layout_constraintEnd_toStartOf="@+id/editTitle"
+                        app:layout_constraintBottom_toBottomOf="@+id/deviceSettingsImg"
+                        app:layout_constraintEnd_toStartOf="@+id/deviceSettingsImg"
                         app:layout_constraintStart_toEndOf="@+id/backButton"
                         app:layout_constraintTop_toTopOf="@+id/backButton" />
 
                     <!-- Edit icon -->
                     <ImageView
-                        android:id="@+id/editTitle"
+                        android:id="@+id/deviceSettingsImg"
+                        android:clickable="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:padding="8dp"
-                        android:src="@drawable/edit_text"
+                        android:src="@drawable/device_setting"
                         app:layout_constraintBottom_toBottomOf="@+id/backButton"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/backButton" />
@@ -372,7 +373,7 @@
                                 android:layout_weight="0.1"
                                 android:fontFamily="@font/coda"
                                 android:padding="6dp"
-                                android:text="Adults detected : "
+                                android:text="Adults in room : "
                                 android:textColor="#000000" />
 
                             <TextView
@@ -384,7 +385,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/coda"
                                 android:padding="6dp"
-                                android:text="0"
+                                android:text="# of adults"
                                 android:textColor="#000000" />
                         </LinearLayout>
 
@@ -405,11 +406,11 @@
                                 android:layout_weight="0.1"
                                 android:fontFamily="@font/coda"
                                 android:padding="6dp"
-                                android:text="Kids detected : "
+                                android:text="Children in room : "
                                 android:textColor="#000000" />
 
                             <TextView
-                                android:id="@+id/kidsDetectedTextView"
+                                android:id="@+id/childrenDetectedTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
@@ -417,7 +418,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/coda"
                                 android:padding="6dp"
-                                android:text="1"
+                                android:text="# of kids"
                                 android:textColor="#000000" />
                         </LinearLayout>
 

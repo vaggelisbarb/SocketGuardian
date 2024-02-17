@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "928893909614",
+    "firebase_url": "https://powermanagementdb-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "powermanagementdb",
     "storage_bucket": "powermanagementdb.appspot.com"
   },
