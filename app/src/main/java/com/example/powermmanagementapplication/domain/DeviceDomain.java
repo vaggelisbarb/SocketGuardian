@@ -53,6 +53,14 @@ public class DeviceDomain implements Serializable {
             return "bluetooth";
     }
 
+    public void toogleStatus() {
+        this.isEnabled = !this.isEnabled;
+        if (this.statusIcon.equals("enabled"))
+            setStatusIcon("disabled");
+        else
+            setStatusIcon("enabled");
+    }
+
     private void initIcons(String connectivity, Boolean isEnabled){
 
         if (connectivity.equals("Wi-Fi"))
@@ -63,7 +71,7 @@ public class DeviceDomain implements Serializable {
             setPicUrl("");
 
         if (isEnabled)
-            setStatusIcon("correct");
+            setStatusIcon("enabled");
         else
             setStatusIcon("disabled");
     }

@@ -46,7 +46,7 @@
             android:paddingTop="2dp"
             android:paddingEnd="6dp"
             android:paddingBottom="2dp"
-            app:srcCompat="@drawable/correct" />
+            app:srcCompat="@drawable/enabled" />
 
     </LinearLayout>
 

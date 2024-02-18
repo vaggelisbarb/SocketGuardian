@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -66,6 +67,8 @@ public class DeviceDetailActivity extends AppCompatActivity {
             binding.deviceSettingsImg.setClickable(true);
             deviceObj.setDeviceName(binding.deviceSettingsImg.toString());
         });
+
+
 
         Dialog deviceSettingsDialog = new Dialog(this);
         binding.deviceSettingsImg.setOnClickListener(view -> {

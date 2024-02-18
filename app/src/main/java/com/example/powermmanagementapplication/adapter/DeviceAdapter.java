@@ -2,15 +2,18 @@ package com.example.powermmanagementapplication.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
+import com.example.powermmanagementapplication.R;
 import com.example.powermmanagementapplication.activity.DeviceDetailActivity;
 import com.example.powermmanagementapplication.databinding.DeviceViewholderListBinding;
 import com.example.powermmanagementapplication.domain.DeviceDomain;
@@ -65,6 +68,28 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
             intent.putExtra("deviceObj", devices.get(position));
             context.startActivity(intent);
         });
+
+        // Set OnClickListener for statusImageView
+        holder.viewholderListBinding.statusImageView.setOnClickListener(view -> {
+            int adapterPosition = holder.getAdapterPosition();
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+
+                DeviceDomain clickedDevice = devices.get(adapterPosition);
+                // Toggle the status of the clicked device
+                clickedDevice.toogleStatus();
+                // Update the status icon
+                int newStatusDrawableResourceId = context.getResources().getIdentifier(clickedDevice.getStatusIcon(),
+                        "drawable", context.getPackageName());
+                Glide.with(context)
+                        .load(newStatusDrawableResourceId)
+                        .transform(new GranularRoundedCorners(30, 30, 0, 0))
+                        .into(holder.viewholderListBinding.statusImageView);
+
+                Toast.makeText(context.getApplicationContext(), "Device status is " + clickedDevice.getStatusIcon(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     @Override
@@ -73,8 +98,10 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(DeviceViewholderListBinding binding) {
+        private final DeviceViewholderListBinding viewholderListBinding;
+        public ViewHolder(DeviceViewholderListBinding viewholderListBinding) {
             super(binding.getRoot());
+            this.viewholderListBinding = viewholderListBinding;
         }
     }
 }

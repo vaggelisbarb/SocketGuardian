@@ -76,18 +76,39 @@
             android:inputType="number"
             android:fontFamily="@font/coda"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/confirmBtn"
-            android:background="@color/secondary_color"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="100dp"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-            android:fontFamily="@font/coda"
-            android:text="Confirm"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            >
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/confirmBtn"
+                android:background="@color/secondary_color"
+                android:fontFamily="@font/coda"
+                android:text="Confirm"
+                android:layout_marginStart="50dp"
+                android:textColor="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/alertBtn"
+                android:background="@color/red"
+                android:fontFamily="@font/coda"
+                android:text="Alert"
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="50dp"
+                android:textColor="@color/white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 </LinearLayout>
