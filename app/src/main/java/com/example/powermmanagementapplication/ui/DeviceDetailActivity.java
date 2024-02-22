@@ -151,6 +151,9 @@ public class DeviceDetailActivity extends AppCompatActivity {
             TextView socketIDTextView = socket1DetailsDialog.findViewById(R.id.socketID);
             socketIDTextView.setText(binding.socket1TextView.getText());
 
+            TextView socketTypeTextView = socket1DetailsDialog.findViewById(R.id.socketTypeTextView);
+            socketTypeTextView.setText(powerSocket1.getSocketType().toUpperCase());
+
             setPowerSocketStatusIcon(socket1DetailsDialog.findViewById(R.id.electricityStatus));
 
             socket1DetailsDialog.show();

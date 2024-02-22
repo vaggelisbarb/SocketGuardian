@@ -9,13 +9,15 @@ public class PowerSocket implements Serializable {
 
     private String socketId;
     private String socketName;
+    private String socketType;
     private String status;
 
     public PowerSocket() { }
 
-    public PowerSocket(String socketID, String socketName, String status) {
+    public PowerSocket(String socketID, String socketName, String socketType, String status) {
         this.socketId = socketID;
         this.socketName = socketName;
+        this.socketType = socketType;
         this.status = status;
     }
 
@@ -43,6 +45,14 @@ public class PowerSocket implements Serializable {
         this.status = status;
     }
 
+    public String getSocketType() {
+        return socketType;
+    }
+
+    public void setSocketType(String socketType) {
+        this.socketType = socketType;
+    }
+
     public String toogleStatus() {
         if (this.status.equalsIgnoreCase("On"))
             this.status = "Off";
@@ -56,6 +66,7 @@ public class PowerSocket implements Serializable {
         return "PowerSocket{" +
                 "socketId='" + socketId + '\'' +
                 ", socketName='" + socketName + '\'' +
+                ", socketType='" + socketType + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }
