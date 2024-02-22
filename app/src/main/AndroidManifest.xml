@@ -36,7 +36,7 @@
         android:theme="@style/Theme.PowermManagementApplication"
         tools:targetApi="31" >
 
-        <activity android:name=".activity.LoginActivity"
+        <activity android:name=".ui.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,19 +44,19 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.RegisterActivity"
+        <activity android:name=".ui.RegisterActivity"
             android:exported="true">
         </activity>
 
-        <activity android:name=".activity.DeviceActivity"
+        <activity android:name=".ui.DeviceActivity"
             android:exported="true">
         </activity>
 
-        <activity android:name=".activity.DeviceDetailActivity"
+        <activity android:name=".ui.DeviceDetailActivity"
             android:exported="true">
         </activity>
 
-        <activity android:name=".activity.BluetoothActivity"
+        <activity android:name=".ui.BluetoothActivity"
             android:exported="true">
         </activity>
 

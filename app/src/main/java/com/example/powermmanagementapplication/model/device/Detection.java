@@ -1,9 +1,11 @@
-package com.example.powermmanagementapplication.domain;
+package com.example.powermmanagementapplication.model.device;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
+
 @IgnoreExtraProperties
-public class Detection {
+public class Detection implements Serializable {
 
     private int adults;
     private int children;
@@ -28,9 +30,9 @@ public class Detection {
 
     @Override
     public String toString() {
-        return "PeopleInfo{" +
+        return "Detection{" +
                 "adults=" + adults +
-                ", kids=" + children +
+                ", children=" + children +
                 '}';
     }
 

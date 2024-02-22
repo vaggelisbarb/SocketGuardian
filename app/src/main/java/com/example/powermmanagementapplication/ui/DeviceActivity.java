@@ -1,32 +1,27 @@
-package com.example.powermmanagementapplication.activity;
+package com.example.powermmanagementapplication.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.powermmanagementapplication.R;
 import com.example.powermmanagementapplication.adapter.DeviceAdapter;
 import com.example.powermmanagementapplication.databinding.ActivityDevicesBinding;
-import com.example.powermmanagementapplication.domain.DeviceDomain;
+import com.example.powermmanagementapplication.model.device.Device;
+import com.example.powermmanagementapplication.repository.DeviceRepository;
+import com.example.powermmanagementapplication.repository.callback.FirebaseAllDevicesCallback;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class DeviceActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
-    private FirebaseUser user;
-
+    private DeviceRepository deviceRepository;
     private ActivityDevicesBinding binding;
 
     @Override
@@ -35,16 +30,9 @@ public class DeviceActivity extends AppCompatActivity {
         binding = ActivityDevicesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        initDevicesRecyclerView();
+        deviceRepository = new DeviceRepository();
 
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-        if (user == null){
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
+        fetchAndDisplayDevices();
         setListeners();
     }
 
@@ -65,17 +53,23 @@ public class DeviceActivity extends AppCompatActivity {
         });
     }
 
-    private void initDevicesRecyclerView(){
-        ArrayList<DeviceDomain> devices = new ArrayList<>();
-        devices.add(new DeviceDomain("1", "Kid's room 1", "Wi-Fi", "19-1-2024 11:33", true, true));
-        devices.add(new DeviceDomain("2", "Kid's room 2", "Bluetooth", "19-1-2024 12:20", true, true));
-        devices.add(new DeviceDomain("3", "Kid's room 3", "Bluetooth", "19-1-2024 12:20", true, false));
-        devices.add(new DeviceDomain("4", "Kid's room 4", "Bluetooth", "14-2-2024 21:20", false, false));
-        devices.add(new DeviceDomain("5", "Kid's room 5", "Wi-Fi", "14-2-2024 23:20", false, false));
+    private void fetchAndDisplayDevices(){
+        deviceRepository.getAllDevices(new FirebaseAllDevicesCallback() {
+            @Override
+            public void onDevicesDataRetrieved(List<Device> data) {
+                binding.activeRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+                binding.activeRecyclerView.setAdapter(new DeviceAdapter((ArrayList<Device>) data));
 
+                for (Device device : data)
+                    Log.i("FirebaseAllDevicesCallback", device.toString());
 
-        binding.activeRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        binding.activeRecyclerView.setAdapter(new DeviceAdapter(devices));
+            }
+
+            @Override
+            public void onDevicesDataRetrievalFailure(String errorMessage) {
+                Log.e("FirebaseAllDevicesCallback", errorMessage);
+            }
+        });
     }
 
     /*

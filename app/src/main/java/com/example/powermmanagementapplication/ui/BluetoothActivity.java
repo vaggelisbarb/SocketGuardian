@@ -1,4 +1,4 @@
-package com.example.powermmanagementapplication.activity;
+package com.example.powermmanagementapplication.ui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;

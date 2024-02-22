@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".activity.DeviceDetailActivity">
+    tools:context=".ui.DeviceDetailActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -161,10 +161,11 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="110dp"
-                        android:layout_marginTop="90dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="85dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
                         android:src="@drawable/green_electricity"
+                        android:clickable="true"
                         app:layout_constraintBottom_toBottomOf="@+id/socket1View"
                         app:layout_constraintEnd_toEndOf="@+id/socket1View"
                         app:layout_constraintHorizontal_bias="1.0"
@@ -175,12 +176,12 @@
                     <!-- Power image for socket 3 -->
                     <ImageView
                         android:id="@+id/powerImage3"
-                        android:layout_height="0dp"
                         android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:layout_marginStart="110dp"
-                        android:layout_marginTop="90dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="85dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
                         android:src="@drawable/red_electricity"
                         app:layout_constraintBottom_toBottomOf="@+id/socket3View"
                         app:layout_constraintEnd_toEndOf="@+id/socket3View"
@@ -223,9 +224,9 @@
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_marginStart="110dp"
-                        android:layout_marginTop="90dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="85dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
                         android:src="@drawable/green_electricity"
                         app:layout_constraintBottom_toBottomOf="@+id/socket2View"
                         app:layout_constraintEnd_toEndOf="@+id/socket2View"

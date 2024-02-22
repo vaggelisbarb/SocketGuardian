@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".activity.DeviceActivity">
+    tools:context=".ui.DeviceActivity">
 
 
     <RelativeLayout
@@ -91,7 +91,7 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center"
                             android:clickable="true"
-                            android:src="@drawable/outlet" />
+                            android:src="@drawable/device64" />
 
                         <TextView
                             android:layout_width="match_parent"

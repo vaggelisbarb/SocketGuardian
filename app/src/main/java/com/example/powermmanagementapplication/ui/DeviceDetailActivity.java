@@ -1,43 +1,47 @@
-package com.example.powermmanagementapplication.activity;
+package com.example.powermmanagementapplication.ui;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.powermmanagementapplication.R;
 import com.example.powermmanagementapplication.databinding.ActivityDeviceDetailsActivityBinding;
-import com.example.powermmanagementapplication.databinding.ActivityDevicesBinding;
-import com.example.powermmanagementapplication.databinding.LayoutDeviceSettingsDialogBinding;
-import com.example.powermmanagementapplication.domain.Detection;
-import com.example.powermmanagementapplication.domain.DeviceDomain;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.powermmanagementapplication.model.device.Device;
+import com.example.powermmanagementapplication.model.device.PowerSocket;
+import com.example.powermmanagementapplication.repository.DeviceRepository;
+import com.example.powermmanagementapplication.repository.PowerSocketRepository;
+import com.example.powermmanagementapplication.repository.callback.FirebaseDeviceCallBack;
+import com.example.powermmanagementapplication.repository.callback.FirebaseUpdatePowerSocketCallback;
+import com.example.powermmanagementapplication.utils.DeviceUiUtils;
+import com.example.powermmanagementapplication.utils.PowerSocketUiUtils;
+
 
 public class DeviceDetailActivity extends AppCompatActivity {
 
+    private static final String UPDATE_POWER_SOCKETS_TAG = "FirebaseUpdatePowerSocketCallback";
+    private static final String DEVICES_TAG = "FirebaseAllDevicesCallback";
+    private static final String DEVICE_DATA_TAG = "FirebaseDeviceCallback";
+    private static final String UPDATE_DEVICE_TAG = "FirebaseUpdateDeviceCallback";
+
     private ActivityDeviceDetailsActivityBinding binding;
-    private DeviceDomain deviceObj;
-    private FirebaseDatabase database;
+    private Device deviceObj;
+    private DeviceRepository deviceRepository;
+    private PowerSocketRepository powerSocketRepository;
+    private PowerSocket powerSocket1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,12 +49,15 @@ public class DeviceDetailActivity extends AppCompatActivity {
         binding = ActivityDeviceDetailsActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        database = FirebaseDatabase.getInstance();
-        getDetectionValuesFromRTDB();
+        deviceRepository = new DeviceRepository();
+        powerSocketRepository = new PowerSocketRepository();
+
+        deviceObj = (Device) getIntent().getSerializableExtra("deviceId");
+        retrieveDeviceData(deviceObj.getDeviceId());
 
         getBundles();
         setListeners();
-
+        initPowerSockets();
     }
 
     private void setListeners() {
@@ -69,7 +76,6 @@ public class DeviceDetailActivity extends AppCompatActivity {
         });
 
 
-
         Dialog deviceSettingsDialog = new Dialog(this);
         binding.deviceSettingsImg.setOnClickListener(view -> {
             deviceSettingsDialog.setContentView(R.layout.layout_device_settings_dialog);
@@ -83,7 +89,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
 
                 String doorHeight = doorHeightEditText.getText().toString();
                 String kidsHeight = kidsHeightEditText.getText().toString();
-
+                /*
                 if (!doorHeight.equals("") && !kidsHeight.equals("")) {
                     DatabaseReference databaseReference = database.getReference();
 
@@ -99,11 +105,39 @@ public class DeviceDetailActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(getApplicationContext(), "Please enter correct values", Toast.LENGTH_SHORT).show();
                 }
+
+                 */
             });
 
             deviceSettingsDialog.show();
 
         });
+
+        binding.powerImage1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PowerSocket powerSocket1 = deviceObj.getPowerSockets().get("power_socket_id_1");
+                if (powerSocket1 != null) {
+                    powerSocketRepository.updatePowerSocketStatus(deviceObj.getDeviceId(),
+                            powerSocket1.getSocketId(),
+                            powerSocket1.toogleStatus(),
+                            new FirebaseUpdatePowerSocketCallback() {
+                                @Override
+                                public void onPowerSocketStatusUpdateSuccess() {
+                                    setPowerSocketStatusIcon(binding.powerImage1);
+                                    Log.i(UPDATE_POWER_SOCKETS_TAG, "Power socket status updated successfully: " + powerSocket1.toString());
+                                    Toast.makeText(DeviceDetailActivity.this, powerSocket1.getSocketName()+" socket status is "+powerSocket1.getStatus(), Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onPowerSocketStatusUpdateFailure(String errorMessage) {
+                                    Log.e(UPDATE_POWER_SOCKETS_TAG, "Failed to update power socket status: " + errorMessage);
+                                }
+                            });
+                }
+            }
+        });
+
 
         Dialog socket1DetailsDialog = new Dialog(this);
         binding.socket1View.setOnClickListener(view -> {
@@ -116,6 +150,8 @@ public class DeviceDetailActivity extends AppCompatActivity {
 
             TextView socketIDTextView = socket1DetailsDialog.findViewById(R.id.socketID);
             socketIDTextView.setText(binding.socket1TextView.getText());
+
+            setPowerSocketStatusIcon(socket1DetailsDialog.findViewById(R.id.electricityStatus));
 
             socket1DetailsDialog.show();
         });
@@ -154,38 +190,48 @@ public class DeviceDetailActivity extends AppCompatActivity {
 
     private void getBundles() {
         // Initialize device's info
-        deviceObj = (DeviceDomain) getIntent().getSerializableExtra("deviceObj");
-
-        int drawableResourced = this.getResources().getIdentifier(deviceObj.setConnectivityIcon(), "drawable", this.getPackageName());
+        int drawableResourced = this.getResources().getIdentifier(DeviceUiUtils.generateConnectivityIcon(deviceObj.getConnectivity()), "drawable", this.getPackageName());
         Glide.with(this)
                 .load(drawableResourced)
                 .into(binding.connectivityImg);
 
         binding.titleTextView.setText(deviceObj.getDeviceName());
-        binding.statusTextView.setText(deviceObj.initEnableStatus());
+        binding.statusTextView.setText(deviceObj.getDeviceStatus().toUpperCase());
+
+        if (deviceObj.getDeviceStatus().equalsIgnoreCase("enabled"))
+            binding.statusTextView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.green));
+        else if (deviceObj.getDeviceStatus().equalsIgnoreCase("disabled"))
+            binding.statusTextView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
+
     }
 
-    private void getDetectionValuesFromRTDB() {
-
-        DatabaseReference detectionsReference = database.getReference("detection");
-        detectionsReference.addValueEventListener(new ValueEventListener() {
+    private void retrieveDeviceData(String deviceId) {
+        deviceRepository.getDeviceData(deviceId, new FirebaseDeviceCallBack() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Detection detection = dataSnapshot.getValue(Detection.class);
-                if (detection != null) {
-                    binding.adultsDetectedTextView.setText(detection.getAdultsDetected());
-                    binding.childrenDetectedTextView.setText(detection.getChildrenDetected());
-                    Log.i("RTDB", detection.toString());
-                }
+            public void onDeviceDataRetrieved(Device device) {
+                binding.adultsDetectedTextView.setText(device.getDetection().getAdultsDetected());
+                binding.childrenDetectedTextView.setText(device.getDetection().getChildrenDetected());
+                Log.i(DEVICE_DATA_TAG, device.toString());
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Failed to read value
-                // Log an error message or handle it as needed
+            public void onDeviceDataRetrievalFailure(String errorMessage) {
+                Log.e(DEVICE_DATA_TAG, errorMessage);
             }
         });
     }
+
+    private void initPowerSockets() {
+        powerSocket1 = deviceObj.getPowerSockets().get("power_socket_id_1");
+        binding.socket1TextView.setText(powerSocket1.getSocketName());
+        setPowerSocketStatusIcon(binding.powerImage1);
+    }
+
+    private void setPowerSocketStatusIcon(ImageView statusIconView) {
+        int drawableResourced = this.getResources().getIdentifier(PowerSocketUiUtils.generateStatusIcon(powerSocket1.getStatus()), "drawable", this.getPackageName());
+        Glide.with(this)
+                .load(drawableResourced)
+                .into(statusIconView);
+    }
+
 }
