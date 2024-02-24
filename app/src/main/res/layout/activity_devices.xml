@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     tools:context=".ui.DeviceActivity">
 
 
@@ -44,7 +43,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_bold"
                 android:text="Devices"
                 android:textColor="@color/primary_color"
                 android:textSize="32sp"
@@ -98,6 +97,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Devices"
+                            android:fontFamily="@font/nexa_bold"
                             android:textAlignment="center" />
 
                     </LinearLayout>
@@ -121,6 +121,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Settings"
+                            android:fontFamily="@font/nexa_bold"
                             android:textAlignment="center" />
 
                     </LinearLayout>
@@ -145,6 +146,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="Logout"
+                            android:fontFamily="@font/nexa_bold"
                             android:textAlignment="center" />
 
                     </LinearLayout>

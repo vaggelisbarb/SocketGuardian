@@ -36,4 +36,6 @@ public interface FirebaseDeviceApi {
      * @param callback  The callback to handle the result of the operation.
      */
     void updateDeviceStatus(String deviceId, String newStatus, FirebaseUpdateDeviceCallback callback);
+
+    void updateDeviceSettings(String deviceId, int doorHeight, int childrenHeight, FirebaseUpdateDeviceCallback callback);
 }

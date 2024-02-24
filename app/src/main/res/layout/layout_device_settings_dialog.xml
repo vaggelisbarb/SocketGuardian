@@ -1,114 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context=".ui.DeviceDetailActivity">
 
+    <!-- Header -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/secondary_color">
+        android:layout_height="wrap_content"
+        android:background="@color/primary_color">
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:id="@+id/settingsImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:src="@drawable/settings2" />
     </RelativeLayout>
 
+    <!-- Content -->
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <!-- Title -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/coda"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/nexa_bold"
             android:gravity="center"
             android:text="Device Settings"
             android:textColor="#000000"
             android:textSize="20sp" />
-        <TextView
-            android:textSize="15sp"
-            android:gravity="start"
-            android:text="Door height"
-            android:layout_marginTop="15dp"
+
+        <!-- Door Height -->
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Door Height"
+            android:fontFamily="@font/nexa_regular"
+            android:textSize="16sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/coda"/>
-        <EditText
+            android:layout_marginBottom="8dp"/>
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/doorHeightEditText"
-            android:layout_marginTop="5dp"
-            android:textSize="15sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Enter door's height in cm"
+            android:fontFamily="@font/nexa_regular"
+            android:inputType="numberDecimal"
             android:drawableEnd="@drawable/height"
             android:textColor="@color/alternative_color"
-            android:hint="Enter door's height in cm"
-            android:textColorHint="@color/alternative_color"
-            android:inputType="number"
-            android:fontFamily="@font/coda"/>
+            android:textColorHint="@color/alternative_color"/>
+
+        <!-- Kids' Height -->
         <TextView
-            android:layout_marginTop="20dp"
-            android:gravity="start"
-            android:text="Kids' height"
-            android:textSize="15sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/coda"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <EditText
-            android:id="@+id/kidsMaxheightEditText"
-            android:layout_marginTop="5dp"
-            android:textSize="15sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Kids' Height"
+            android:fontFamily="@font/nexa_regular"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/kidsMaxHeightEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter max kid's height in cm"
+            android:fontFamily="@font/nexa_regular"
+            android:inputType="numberDecimal"
             android:drawableEnd="@drawable/kids_height"
             android:textColor="@color/alternative_color"
-            android:hint="Enter max kid's height in cm"
-            android:textColorHint="@color/alternative_color"
-            android:inputType="number"
-            android:fontFamily="@font/coda"/>
+            android:textColorHint="@color/alternative_color"/>
 
+        <!-- Buttons -->
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            >
+            android:layout_marginTop="24dp">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/confirmBtn"
-                android:background="@color/secondary_color"
-                android:fontFamily="@font/coda"
+                android:id="@+id/confirmButton"
+                android:drawableEnd="@drawable/confirm_white"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/secondary_color"
                 android:text="Confirm"
-                android:layout_marginStart="50dp"
                 android:textColor="@color/white"
+                android:fontFamily="@font/nexa_regular"
+                android:layout_marginEnd="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/alertButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/alertBtn"
-                android:background="@color/red"
-                android:fontFamily="@font/coda"
+                android:layout_weight="1"
+                android:backgroundTint="@color/red"
                 android:text="Alert"
-                android:layout_marginStart="100dp"
-                android:layout_marginEnd="50dp"
                 android:textColor="@color/white"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-
+                android:fontFamily="@font/nexa_regular"
+                android:drawableEnd="@drawable/alert_white"
+                android:layout_marginStart="8dp"/>
         </LinearLayout>
-
-
-
     </LinearLayout>
 </LinearLayout>

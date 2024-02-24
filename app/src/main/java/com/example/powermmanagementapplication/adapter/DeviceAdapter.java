@@ -84,7 +84,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
 
                 Device clickedDevice = devices.get(adapterPosition);
                 // Toggle the status of the clicked device
-                deviceRepository.updateDeviceStatus(clickedDevice.getDeviceId(), clickedDevice.toogsleStatus(),  new FirebaseUpdateDeviceCallback() {
+                deviceRepository.updateDeviceStatus(clickedDevice.getDeviceId(), clickedDevice.toggleStatus(),  new FirebaseUpdateDeviceCallback() {
                     @Override
                     public void onDeviceStatusUpdateSuccess() {
                         // Update the status icon

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     tools:context=".ui.DeviceDetailActivity">
 
     <RelativeLayout
@@ -39,19 +38,19 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <!-- Device title -->
-                    <EditText
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/titleTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clickable="false"
                         android:cursorVisible="false"
                         android:focusable="false"
-                        android:fontFamily="@font/coda"
+                        android:fontFamily="@font/nexa_bold"
                         android:text="Device Name"
                         android:textAlignment="center"
                         android:textAllCaps="false"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
+                        android:textColor="@color/primary_color"
+                        android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="@+id/deviceSettingsImg"
                         app:layout_constraintEnd_toStartOf="@+id/deviceSettingsImg"
                         app:layout_constraintStart_toEndOf="@+id/backButton"
@@ -127,7 +126,7 @@
                         android:layout_marginStart="7dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="100dp"
-                        android:fontFamily="@font/coda"
+                        android:fontFamily="@font/nexa_bold"
                         android:text="Socket 1"
                         android:textColor="#000000"
                         android:textSize="14sp"
@@ -145,7 +144,7 @@
                         android:layout_marginStart="7dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="100dp"
-                        android:fontFamily="@font/coda"
+                        android:fontFamily="@font/nexa_bold"
                         android:text="Socket 3"
                         android:textColor="#000000"
                         android:textSize="14sp"
@@ -160,12 +159,12 @@
                         android:id="@+id/powerImage1"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="110dp"
-                        android:layout_marginTop="85dp"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginTop="80dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="5dp"
-                        android:src="@drawable/green_electricity"
                         android:clickable="true"
+                        android:src="@drawable/green_electricity"
                         app:layout_constraintBottom_toBottomOf="@+id/socket1View"
                         app:layout_constraintEnd_toEndOf="@+id/socket1View"
                         app:layout_constraintHorizontal_bias="1.0"
@@ -178,8 +177,8 @@
                         android:id="@+id/powerImage3"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="110dp"
-                        android:layout_marginTop="85dp"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginTop="80dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="5dp"
                         android:src="@drawable/red_electricity"
@@ -208,7 +207,7 @@
                         android:layout_marginStart="7dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="100dp"
-                        android:fontFamily="@font/coda"
+                        android:fontFamily="@font/nexa_bold"
                         android:text="Socket 2"
                         android:textColor="#000000"
                         android:textSize="14sp"
@@ -223,8 +222,8 @@
                         android:id="@+id/powerImage2"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="110dp"
-                        android:layout_marginTop="85dp"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginTop="80dp"
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="5dp"
                         android:src="@drawable/green_electricity"
@@ -289,8 +288,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="5dp"
+                            android:fontFamily="@font/nexa_bold"
                             android:text="Device Information"
-                            android:fontFamily="@font/coda"
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
@@ -309,10 +308,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_weight="0.1"
-                                android:fontFamily="@font/coda"
+                                android:fontFamily="@font/nexa_regular"
                                 android:padding="6dp"
                                 android:text="Connectivity : "
-                                android:textColor="#000000" />
+                                android:textColor="@color/secondary_color" />
 
                             <ImageView
                                 android:id="@+id/connectivityImg"
@@ -339,10 +338,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_weight="0.1"
-                                android:fontFamily="@font/coda"
+                                android:fontFamily="@font/nexa_regular"
                                 android:padding="6dp"
                                 android:text="Status : "
-                                android:textColor="#000000" />
+                                android:textColor="@color/secondary_color" />
 
                             <TextView
                                 android:id="@+id/statusTextView"
@@ -351,7 +350,7 @@
                                 android:layout_gravity="start"
                                 android:layout_marginEnd="150dp"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/coda"
+                                android:fontFamily="@font/nexa_regular"
                                 android:padding="6dp"
                                 android:text="Current status "
                                 android:textColor="#000000" />
@@ -372,10 +371,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_weight="0.1"
-                                android:fontFamily="@font/coda"
+                                android:fontFamily="@font/nexa_regular"
                                 android:padding="6dp"
                                 android:text="Adults in room : "
-                                android:textColor="#000000" />
+                                android:textColor="@color/secondary_color" />
 
                             <TextView
                                 android:id="@+id/adultsDetectedTextView"
@@ -384,7 +383,7 @@
                                 android:layout_gravity="start"
                                 android:layout_marginEnd="150dp"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/coda"
+                                android:fontFamily="@font/nexa_regular"
                                 android:padding="6dp"
                                 android:text="# of adults"
                                 android:textColor="#000000" />
@@ -405,10 +404,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start"
                                 android:layout_weight="0.1"
-                                android:fontFamily="@font/coda"
+                                android:fontFamily="@font/nexa_regular"
                                 android:padding="6dp"
                                 android:text="Children in room : "
-                                android:textColor="#000000" />
+                                android:textColor="@color/secondary_color" />
 
                             <TextView
                                 android:id="@+id/childrenDetectedTextView"
@@ -417,7 +416,7 @@
                                 android:layout_gravity="start"
                                 android:layout_marginEnd="150dp"
                                 android:layout_weight="1"
-                                android:fontFamily="@font/coda"
+                                android:fontFamily="@font/nexa_regular"
                                 android:padding="6dp"
                                 android:text="# of kids"
                                 android:textColor="#000000" />
@@ -439,7 +438,11 @@
                     android:layout_height="60dp"
                     android:layout_marginStart="80dp"
                     android:layout_marginEnd="80dp"
-                    android:fontFamily="@font/coda"
+                    android:elevation="100dp"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="20"
+                    android:fontFamily="@font/nexa_regular"
+                    android:backgroundTint="@color/primary_color"
                     android:text="Remove device"
                     app:cornerRadius="32dp" />
 

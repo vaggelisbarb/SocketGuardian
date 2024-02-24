@@ -102,4 +102,26 @@ public class FirebaseDeviceApiImpl implements FirebaseDeviceApi {
                 });
 
     }
+
+    @Override
+    public void updateDeviceSettings(String deviceId, int doorHeight, int childrenHeight, FirebaseUpdateDeviceCallback callback) {
+        DatabaseReference settingDoorHeightRef = deviceRef.child(deviceId).child("settings").child("doorHeight");
+        settingDoorHeightRef.setValue(doorHeight)
+                .addOnSuccessListener(aVoid -> {
+                    callback.onDeviceStatusUpdateSuccess();
+                })
+                .addOnFailureListener(e -> {
+                   callback.onDeviceStatusUpdateFailure(e.getMessage());
+                });
+
+        DatabaseReference settingChildrenHeightRef = deviceRef.child(deviceId).child("settings").child("childrenHeight");
+        settingChildrenHeightRef.setValue(childrenHeight)
+                .addOnSuccessListener(aVoid -> {
+                    callback.onDeviceStatusUpdateSuccess();
+                })
+                .addOnFailureListener(e -> {
+                    callback.onDeviceStatusUpdateFailure(e.getMessage());
+                });
+
+    }
 }

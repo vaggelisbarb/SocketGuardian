@@ -1,9 +1,10 @@
 package com.example.powermmanagementapplication.model.device;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 @IgnoreExtraProperties
@@ -17,12 +18,9 @@ public class Device implements Serializable{
     private String deviceStatus;
     private Detection detection;
     private Map<String, PowerSocket> powerSockets;
-    //private DeviceSettings deviceSettings;
+    private Settings settings;
 
-
-    public Device() {
-        //powerSockets = new Ma<>();
-    }
+    public Device() { }
 
     public Device(String deviceId, String deviceName, String connectivity, String lastUpdate, String pairStatus, String deviceStatus) {
         this.deviceId = deviceId;
@@ -31,7 +29,6 @@ public class Device implements Serializable{
         this.lastUpdate = lastUpdate;
         this.pairStatus = pairStatus;
         this.deviceStatus = deviceStatus;
-        //powerSocketList = new ArrayList<>();
     }
 
     public String getDeviceId() {
@@ -98,18 +95,16 @@ public class Device implements Serializable{
         this.powerSockets = powerSockets;
     }
 
-/*
-    public DeviceSettings getDeviceSettings() {
-        return deviceSettings;
+    public Settings getSettings() {
+        return settings;
     }
 
-    public void setDeviceSettings(DeviceSettings deviceSettings) {
-        this.deviceSettings = deviceSettings;
+    public void setSettings(Settings settings) {
+        this.settings = settings;
     }
 
- */
 
-    public String toogsleStatus() {
+    public String toggleStatus() {
         if (this.deviceStatus.equalsIgnoreCase("enabled"))
             this.deviceStatus = "disabled";
         else if (this.deviceStatus.equalsIgnoreCase("disabled"))
@@ -134,9 +129,10 @@ public class Device implements Serializable{
                 ", connectivity='" + connectivity + '\'' +
                 ", lastUpdate='" + lastUpdate + '\'' +
                 ", pairStatus='" + pairStatus + '\'' +
-                ", status='" + deviceStatus + '\'' +
+                ", deviceStatus='" + deviceStatus + '\'' +
                 ", detection=" + detection.toString() +
                 ", powerSockets=" + convertPowerSocketListToString(powerSockets) +
+                ", settings=" + settings.toString() +
                 '}';
     }
 }

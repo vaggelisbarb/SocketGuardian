@@ -66,4 +66,10 @@ public class DeviceRepository {
     public void updateDeviceStatus(String deviceId, String newStatus, FirebaseUpdateDeviceCallback callback) {
         firebaseDeviceApi.updateDeviceStatus(deviceId, newStatus, callback);
     }
+
+
+    public void updateDeviceSettings(String deviceId, int doorHeight, int childrenHeight, FirebaseUpdateDeviceCallback callback) {
+        firebaseDeviceApi.updateDeviceSettings(deviceId, doorHeight, childrenHeight, callback);
+    }
+
 }

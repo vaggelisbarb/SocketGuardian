@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/coda"
+            android:fontFamily="@font/nexa_bold"
             android:text="Socket Guardian"
             android:textColor="@color/white"
             android:textSize="32sp"
@@ -52,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_bold"
                 android:text="Welcome"
                 android:textColor="@color/primary_color"
                 android:textSize="32sp"
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Please login with your credentials" />
 
             <View
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Email Address"
                 android:textStyle="bold" />
 
@@ -81,8 +81,9 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:drawableEnd="@drawable/done_icon"/>
+                android:drawableEnd="@drawable/done_icon"
+                android:fontFamily="@font/nexa_regular"
+                android:inputType="textEmailAddress" />
 
             <View
                 android:layout_width="wrap_content"
@@ -92,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Password"
                 android:textStyle="bold" />
 
@@ -100,8 +101,9 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:drawableEnd="@drawable/password_icon"/>
+                android:drawableEnd="@drawable/password_icon"
+                android:fontFamily="@font/nexa_regular"
+                android:inputType="textPassword" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -112,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:alpha="0.7"
-                    android:fontFamily="@font/coda"
+                    android:fontFamily="@font/nexa_regular"
                     android:text="Remember me" />
 
                 <TextView
@@ -120,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:fontFamily="@font/coda"
+                    android:fontFamily="@font/nexa_regular"
                     android:text="I forgot my password" />
 
             </RelativeLayout>
@@ -137,7 +139,7 @@
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Login"
                 app:cornerRadius="32dp" />
 
@@ -150,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:alpha="0.7"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_light"
                 android:text="Or Login with" />
 
             <LinearLayout
@@ -187,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:alpha="0.7"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_light"
                 android:text="You don't have an account?" />
 
             <com.google.android.material.button.MaterialButton
@@ -198,7 +200,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="60dp"
                 android:backgroundTint="@color/alternative_color"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Register"
                 app:cornerRadius="32dp" />
         </LinearLayout>

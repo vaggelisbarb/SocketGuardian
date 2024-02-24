@@ -3,6 +3,7 @@ package com.example.powermmanagementapplication.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,6 +45,12 @@ public class DeviceActivity extends AppCompatActivity {
             //this.showNewDevicePopUpMenu(view);
         });
 
+        binding.settings.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
         binding.layoutLogout.setOnClickListener(view -> {
             FirebaseAuth.getInstance().signOut();
             Toast.makeText(DeviceActivity.this, "Logging out", Toast.LENGTH_SHORT).show();
@@ -51,6 +58,8 @@ public class DeviceActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+
     }
 
     private void fetchAndDisplayDevices(){

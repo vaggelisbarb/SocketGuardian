@@ -22,8 +22,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/coda"
-            android:text="Power Management"
+            android:fontFamily="@font/nexa_bold"
+            android:text="Socket Guardian"
             android:textColor="@color/white"
             android:textSize="32sp"
             android:textStyle="bold" />
@@ -52,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_bold"
                 android:text="Register"
                 android:textColor="@color/primary_color"
                 android:textSize="32sp"
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Please set your credentials" />
 
             <View
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Email Address"
                 android:textStyle="bold" />
 
@@ -82,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/done_icon"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:inputType="textEmailAddress" />
 
             <View
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Password"
                 android:textStyle="bold" />
 
@@ -102,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/password_icon"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:inputType="textPassword" />
 
             <View
@@ -113,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Confirm Password"
                 android:textStyle="bold" />
 
@@ -122,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/password_icon"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:inputType="textPassword" />
 
 
@@ -140,7 +140,7 @@
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Register"
                 app:cornerRadius="32dp" />
 
@@ -154,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:clickable="true"
-                android:fontFamily="@font/coda"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Do you have an account? Sign in"
                 android:textStyle="bold" />
         </LinearLayout>

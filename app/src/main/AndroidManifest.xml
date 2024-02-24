@@ -64,6 +64,10 @@
             android:exported="true">
         </activity>
 
+        <activity android:name=".ui.SettingsActivity"
+            android:exported="true">
+        </activity>
+
         <service
             android:name=".service.NotificationHandlerService"
             android:exported="false">

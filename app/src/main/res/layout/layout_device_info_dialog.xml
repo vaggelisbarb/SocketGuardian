@@ -28,7 +28,7 @@
             android:id="@+id/DeviceID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/coda"
+            android:fontFamily="@font/nexa_bold"
             android:gravity="center"
             android:text="Device ID"
             android:textColor="#000000"
@@ -43,22 +43,22 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/coda"
+                android:layout_weight="1"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Socket type : "
                 android:textColor="#000000"
-                android:textSize="18sp"
-                android:layout_weight="1"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/socketTypeTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/coda"
+                android:layout_weight="1"
+                android:fontFamily="@font/nexa_regular"
+                android:gravity="center"
                 android:text="safe/unsafe socket"
                 android:textColor="#000000"
-                android:textSize="18sp"
-                android:layout_weight="1"
-                android:gravity="center"/>
+                android:textSize="18sp" />
 
         </LinearLayout>
         <LinearLayout
@@ -71,12 +71,12 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/coda"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Electricity status : "
                 android:textColor="#000000"
-                android:textSize="18sp"
-                android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/electricityStatus"
@@ -98,18 +98,20 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
+                android:fontFamily="@font/nexa_regular"
                 android:text="Notifications : "
-                android:textSize="18sp"
                 android:textColor="#000000"
-                android:fontFamily="@font/coda"
-                android:layout_gravity="center"/>
+                android:textSize="18sp" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_marginEnd="70dp"/>
+                android:thumbTint="@color/secondary_color"
+                android:trackTint="@color/alternative_color"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 
