@@ -1,5 +1,6 @@
 package com.example.powermmanagementapplication.repository.api;
 
+import com.example.powermmanagementapplication.repository.callback.FirebasePowerSocketCallback;
 import com.example.powermmanagementapplication.repository.callback.FirebaseUpdatePowerSocketCallback;
 
 public interface FirebasePowerSocketApi {
@@ -14,4 +15,5 @@ public interface FirebasePowerSocketApi {
      */
     void updatePowerSocketStatus(String deviceId, String socketId, String newStatus, FirebaseUpdatePowerSocketCallback callback);
 
+    void getPowerSocket(String deviceId, String powerSocketId, FirebasePowerSocketCallback callback);
 }

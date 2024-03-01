@@ -25,6 +25,7 @@ import com.example.powermmanagementapplication.model.device.PowerSocket;
 import com.example.powermmanagementapplication.repository.DeviceRepository;
 import com.example.powermmanagementapplication.repository.PowerSocketRepository;
 import com.example.powermmanagementapplication.repository.callback.FirebaseDeviceCallBack;
+import com.example.powermmanagementapplication.repository.callback.FirebasePowerSocketCallback;
 import com.example.powermmanagementapplication.repository.callback.FirebaseUpdateDeviceCallback;
 import com.example.powermmanagementapplication.repository.callback.FirebaseUpdatePowerSocketCallback;
 import com.example.powermmanagementapplication.utils.DeviceUiUtils;
@@ -42,8 +43,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
     private Device deviceObj;
     private DeviceRepository deviceRepository;
     private PowerSocketRepository powerSocketRepository;
-    private PowerSocket powerSocket1;
-    private PowerSocket powerSocket2;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,8 +58,8 @@ public class DeviceDetailActivity extends AppCompatActivity {
         retrieveDeviceData(deviceObj.getDeviceId());
 
         getBundles();
-        setListeners();
         initPowerSockets();
+        setListeners();
     }
 
     private void setListeners() {
@@ -119,6 +119,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
         binding.powerImage1.setOnClickListener(view -> {
             PowerSocket powerSocket1 = deviceObj.getPowerSockets().get("power_socket_id_1");
             if (powerSocket1 != null) {
+                 //updatePowerSocketStatus(powerSocket1, binding.powerImage1);
                 powerSocketRepository.updatePowerSocketStatus(deviceObj.getDeviceId(),
                         powerSocket1.getSocketId(),
                         powerSocket1.toogleStatus(),
@@ -141,22 +142,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
         binding.powerImage2.setOnClickListener(view -> {
             PowerSocket powerSocket2 = deviceObj.getPowerSockets().get("power_socket_id_2");
             if (powerSocket2 != null) {
-                powerSocketRepository.updatePowerSocketStatus(deviceObj.getDeviceId(),
-                        powerSocket2.getSocketId(),
-                        powerSocket2.toogleStatus(),
-                        new FirebaseUpdatePowerSocketCallback() {
-                            @Override
-                            public void onPowerSocketStatusUpdateSuccess() {
-                                setPowerSocketStatusIcon(binding.powerImage2, powerSocket2);
-                                Log.i(UPDATE_POWER_SOCKETS_TAG, "Power socket status updated successfully: " + powerSocket2.toString());
-                                Toast.makeText(DeviceDetailActivity.this, powerSocket2.getSocketName()+" socket status is "+powerSocket2.getStatus(), Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onPowerSocketStatusUpdateFailure(String errorMessage) {
-                                Log.e(UPDATE_POWER_SOCKETS_TAG, "Failed to update power socket status: " + errorMessage);
-                            }
-                        });
+                updatePowerSocketStatus(powerSocket2, binding.powerImage2);
             }
         });
 
@@ -174,9 +160,13 @@ public class DeviceDetailActivity extends AppCompatActivity {
             socketIDTextView.setText(binding.socket1TextView.getText());
 
             TextView socketTypeTextView = socket1DetailsDialog.findViewById(R.id.socketTypeTextView);
-            socketTypeTextView.setText(powerSocket1.getSocketType().toUpperCase());
+            socketTypeTextView.setText(deviceObj
+                    .getPowerSockets()
+                    .get("power_socket_id_1")
+                    .getSocketType()
+                    .toUpperCase());
 
-            setPowerSocketStatusIcon(socket1DetailsDialog.findViewById(R.id.electricityStatus), powerSocket1);
+            setPowerSocketStatusIcon(socket1DetailsDialog.findViewById(R.id.electricityStatus), deviceObj.getPowerSockets().get("power_socket_id_1"));
 
             socket1DetailsDialog.show();
         });
@@ -191,13 +181,18 @@ public class DeviceDetailActivity extends AppCompatActivity {
             layout.setBackgroundResource(R.color.alternative_color);
 
             TextView socketTypeTextView = socket2DetailsDialog.findViewById(R.id.socketTypeTextView);
-            socketTypeTextView.setText(powerSocket2.getSocketType().toUpperCase());
+            socketTypeTextView.setText(deviceObj
+                    .getPowerSockets()
+                    .get("power_socket_id_2")
+                    .getSocketType()
+                    .toUpperCase());
 
 
             TextView socketIDTextView = socket2DetailsDialog.findViewById(R.id.socketID);
             socketIDTextView.setText(binding.socket2TextView.getText());
 
-            setPowerSocketStatusIcon(socket2DetailsDialog.findViewById(R.id.electricityStatus), powerSocket2);
+            setPowerSocketStatusIcon(socket2DetailsDialog.findViewById(R.id.electricityStatus),
+                    deviceObj.getPowerSockets().get("power_socket_id_2"));
 
             socket2DetailsDialog.show();
         });
@@ -253,14 +248,41 @@ public class DeviceDetailActivity extends AppCompatActivity {
     }
 
     private void initPowerSockets() {
-        powerSocket1 = deviceObj.getPowerSockets().get("power_socket_id_1");
-        binding.socket1TextView.setText(powerSocket1.getSocketName());
-        setPowerSocketStatusIcon(binding.powerImage1, powerSocket1);
+        powerSocketRepository.getPowerSocket(deviceObj.getDeviceId(),
+                "power_socket_id_1",
+                new FirebasePowerSocketCallback() {
+                    @Override
+                    public void onPowerSocketDataRetrieved(PowerSocket powerSocket) {
+                        binding.socket1TextView.setText(powerSocket.getSocketName());
+                        setPowerSocketStatusIcon(binding.powerImage1, powerSocket);
+                        deviceObj.getPowerSockets().get("power_socket_id_1").setStatus(powerSocket.getStatus());
+                    }
 
-        powerSocket2 = deviceObj.getPowerSockets().get("power_socket_id_2");
-        binding.socket2TextView.setText(powerSocket2.getSocketName());
-        setPowerSocketStatusIcon(binding.powerImage2, powerSocket2);
+                    @Override
+                    public void onPowerSocketDataRetrievalFailure(String errorMessage) {
+                        Log.e("DeviceDetailActivity", errorMessage);
+                    }
 
+                });
+
+
+        powerSocketRepository.getPowerSocket(deviceObj.getDeviceId(),
+                "power_socket_id_2",
+                new FirebasePowerSocketCallback() {
+                    @Override
+                    public void onPowerSocketDataRetrieved(PowerSocket powerSocket) {
+                        binding.socket2TextView.setText(powerSocket.getSocketName());
+                        setPowerSocketStatusIcon(binding.powerImage2, powerSocket);
+                        deviceObj.getPowerSockets().get("power_socket_id_2").setStatus(powerSocket.getStatus());
+
+                    }
+
+                    @Override
+                    public void onPowerSocketDataRetrievalFailure(String errorMessage) {
+                        Log.e("DeviceDetailActivity", errorMessage);
+                    }
+
+                });
     }
 
     private void setPowerSocketStatusIcon(ImageView statusIconView, PowerSocket powerSocket) {
@@ -268,6 +290,25 @@ public class DeviceDetailActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(drawableResourced)
                 .into(statusIconView);
+    }
+
+    private void updatePowerSocketStatus(PowerSocket powerSocket, ImageView image){
+        powerSocketRepository.updatePowerSocketStatus(deviceObj.getDeviceId(),
+                powerSocket.getSocketId(),
+                powerSocket.toogleStatus(),
+                new FirebaseUpdatePowerSocketCallback() {
+                    @Override
+                    public void onPowerSocketStatusUpdateSuccess() {
+                        setPowerSocketStatusIcon(image, powerSocket);
+                        Log.i(UPDATE_POWER_SOCKETS_TAG, "Power socket status updated successfully: " + powerSocket.toString());
+                        Toast.makeText(DeviceDetailActivity.this, powerSocket.getSocketName()+" socket status is "+powerSocket.getStatus(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onPowerSocketStatusUpdateFailure(String errorMessage) {
+                        Log.e(UPDATE_POWER_SOCKETS_TAG, "Failed to update power socket status: " + errorMessage);
+                    }
+                });
     }
 
 }
