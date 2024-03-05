@@ -62,6 +62,17 @@ public class DeviceDetailActivity extends AppCompatActivity {
         setListeners();
     }
 
+    private void checkForAlert(Device device) {
+        if (device.getAlert().equalsIgnoreCase("On")) {
+            binding.alertImage.setVisibility(View.VISIBLE);
+            Glide.with(this).load(R.drawable.alert).into(binding.alertImage);
+            binding.motionDetectedTextView.setVisibility(View.VISIBLE);
+        } else {
+            binding.alertImage.setVisibility(View.GONE);
+            binding.motionDetectedTextView.setVisibility(View.GONE);
+        }
+    }
+
     private void setListeners() {
         // Back button functionality
         binding.backButton.setOnClickListener(view -> {
@@ -237,6 +248,7 @@ public class DeviceDetailActivity extends AppCompatActivity {
             public void onDeviceDataRetrieved(Device device) {
                 binding.adultsDetectedTextView.setText(device.getDetection().getAdultsDetected());
                 binding.childrenDetectedTextView.setText(device.getDetection().getChildrenDetected());
+                checkForAlert(device);
                 Log.i(DEVICE_DATA_TAG, device.toString());
             }
 

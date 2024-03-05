@@ -16,19 +16,21 @@ public class Device implements Serializable{
     private String lastUpdate;
     private String pairStatus;
     private String deviceStatus;
+    private String alert;
     private Detection detection;
     private Map<String, PowerSocket> powerSockets;
     private Settings settings;
 
     public Device() { }
 
-    public Device(String deviceId, String deviceName, String connectivity, String lastUpdate, String pairStatus, String deviceStatus) {
+    public Device(String deviceId, String deviceName, String connectivity, String lastUpdate, String pairStatus, String deviceStatus, String alert) {
         this.deviceId = deviceId;
         this.deviceName = deviceName;
         this.connectivity = connectivity;
         this.lastUpdate = lastUpdate;
         this.pairStatus = pairStatus;
         this.deviceStatus = deviceStatus;
+        this.alert = alert;
     }
 
     public String getDeviceId() {
@@ -103,6 +105,13 @@ public class Device implements Serializable{
         this.settings = settings;
     }
 
+    public String getAlert() {
+        return alert;
+    }
+
+    public void setAlert(String alert) {
+        this.alert = alert;
+    }
 
     public String toggleStatus() {
         if (this.deviceStatus.equalsIgnoreCase("enabled"))

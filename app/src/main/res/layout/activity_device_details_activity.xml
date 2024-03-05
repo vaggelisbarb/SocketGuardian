@@ -233,6 +233,34 @@
                         app:layout_constraintTop_toBottomOf="@+id/greenbar" />
 
                     <!-- Color bars -->
+
+                    <TextView
+                        android:id="@+id/motionDetectedTextView"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nexa_regular"
+                        android:text="Motion detected"
+                        android:textColor="@color/red"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.672"
+                        app:layout_constraintStart_toEndOf="@+id/socket3View"
+                        app:layout_constraintTop_toBottomOf="@+id/alertImage"
+                        app:layout_constraintVertical_bias="0.1" />
+
+                    <ImageView
+                        android:id="@+id/alertImage"
+                        android:layout_width="57dp"
+                        android:layout_height="43dp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.619"
+                        app:layout_constraintStart_toEndOf="@+id/socket3View"
+                        app:layout_constraintTop_toBottomOf="@+id/socket2View"
+                        app:layout_constraintVertical_bias="0.405" />
+
                     <View
                         android:id="@+id/bluebar"
                         android:layout_width="80dp"
