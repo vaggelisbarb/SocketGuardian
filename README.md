@@ -33,11 +33,11 @@
 ## 📷 Screenshots
 | Login Screen | Register Screen | Home Menu |
 |--------------|-----------------|-----------|
-| <img src="https://github.com/user-attachments/assets/e26c1e62-309d-4127-a22e-42417ca5d076" width="300" height="600"/> | <img src="https://github.com/user-attachments/assets/c8cac860-aad8-4bad-9cf2-ff4143f453cd" width="300" height="600"/> | <img src="https://github.com/user-attachments/assets/5a07150f-1b53-44bd-8dc4-689a3a49bca5" width="300" height="600"/>
+| <img src="https://github.com/user-attachments/assets/e26c1e62-309d-4127-a22e-42417ca5d076" width="300" height="500"/> | <img src="https://github.com/user-attachments/assets/c8cac860-aad8-4bad-9cf2-ff4143f453cd" width="300" height="500"/> | <img src="https://github.com/user-attachments/assets/5a07150f-1b53-44bd-8dc4-689a3a49bca5" width="300" height="500"/>
 
 | Device Menu | Power Socket | Settings |
 |-------------|--------------|----------|
-| <img src="https://github.com/user-attachments/assets/abe6e13c-9ba6-44cb-8355-1db2d88937d4" width="300" height="600"/> | <img src="https://github.com/user-attachments/assets/ab8dd4ec-b91b-42c3-917a-cfbd399147eb" width="300" height="600"/> | <img src="https://github.com/user-attachments/assets/df8515a3-281a-465f-bb27-1dc18ad2b52c" width="300" height="600"/>
+| <img src="https://github.com/user-attachments/assets/abe6e13c-9ba6-44cb-8355-1db2d88937d4" width="300" height="500"/> | <img src="https://github.com/user-attachments/assets/ab8dd4ec-b91b-42c3-917a-cfbd399147eb" width="300" height="500"/> | <img src="https://github.com/user-attachments/assets/df8515a3-281a-465f-bb27-1dc18ad2b52c" width="300" height="500"/>
 
 
 ---
