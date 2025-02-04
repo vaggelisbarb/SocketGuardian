@@ -33,9 +33,7 @@
 ## 📷 Screenshots
 | Login Screen | Register Screen | Home Menu |
 |--------------|-----------------|-----------|
-| <img src="https://github.com/user-attachments/assets/e26c1e62-309d-4127-a22e-42417ca5d076" width="280" height="450"/>
-| <img src="https://github.com/user-attachments/assets/c8cac860-aad8-4bad-9cf2-ff4143f453cd" width="280" height="450"/> 
-| <img src="https://github.com/user-attachments/assets/5a07150f-1b53-44bd-8dc4-689a3a49bca5" width="280" height="450"/>
+| <img src="https://github.com/user-attachments/assets/e26c1e62-309d-4127-a22e-42417ca5d076" width="250" height="550"/> | <img src="https://github.com/user-attachments/assets/c8cac860-aad8-4bad-9cf2-ff4143f453cd" width="250" height="550"/> | <img src="https://github.com/user-attachments/assets/5a07150f-1b53-44bd-8dc4-689a3a49bca5" width="250" height="550"/>
 
 
 
