@@ -1,16 +1,16 @@
 # Socket Guardian
 
-## 📌 Overview
+## Overview
 **Socket Guardian** is an **Android application** designed to enhance **child safety** by controlling the **power outlets** in a room. Using an **ESP32 microcontroller** with **Bluetooth, Wi-Fi sockets, and sensors**, the system detects the presence of a child in a room and automatically **disables power outlets** to prevent accidents.
 
 ---
 
 ## Features
-- **Automated Power Control** – Disables all power sockets when a child enters the room.
-- **Real-time Monitoring** – Utilizes sensors connected to an ESP32 board to detect child presence.
-- **Wireless Communication** – Communicates seamlessly with the ESP32 board via Bluetooth and Wi-Fi.
-- **Cloud-Based Storage** – Uses Firebase to store and manage device and user data.
-- **User-Friendly Android Interface** – Intuitive UI for configuring and monitoring socket status.
+🔹 **Automated Power Control** – Disables all power sockets when a child enters the room.
+🔹 **Real-time Monitoring** – Utilizes sensors connected to an ESP32 board to detect child presence.
+🔹 **Wireless Communication** – Communicates seamlessly with the ESP32 board via Bluetooth and Wi-Fi.
+🔹 **Cloud-Based Storage** – Uses Firebase to store and manage device and user data.
+🔹 **User-Friendly Android Interface** – Intuitive UI for configuring and monitoring socket status.
 
 ---
 
