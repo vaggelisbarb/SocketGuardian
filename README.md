@@ -37,7 +37,7 @@
 
 | Device Menu | Power Socket | Settings |
 |-------------|--------------|----------|
-| <img src="https://github.com/user-attachments/assets/e26c1e62-309d-4127-a22e-42417ca5d076](https://github.com/user-attachments/assets/2df7ebbc-d50e-44dc-b8f7-e1c6c5336b89" width="300" height="600"/> | <img src="https://github.com/user-attachments/assets/ab8dd4ec-b91b-42c3-917a-cfbd399147eb" width="300" height="600"/> | <img src="https://github.com/user-attachments/assets/df8515a3-281a-465f-bb27-1dc18ad2b52c" width="300" height="600"/>
+| <img src="https://github.com/user-attachments/assets/abe6e13c-9ba6-44cb-8355-1db2d88937d4" width="300" height="600"/> | <img src="https://github.com/user-attachments/assets/ab8dd4ec-b91b-42c3-917a-cfbd399147eb" width="300" height="600"/> | <img src="https://github.com/user-attachments/assets/df8515a3-281a-465f-bb27-1dc18ad2b52c" width="300" height="600"/>
 
 
 ---
@@ -46,7 +46,7 @@
 ### **📱 Android App Setup**
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/SocketGuardian.git
+   git clone https://github.com/vaggelisbarb/SocketGuardian.git
    cd SocketGuardian
    ```
 2. Open in **Android Studio**.
