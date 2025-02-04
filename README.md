@@ -5,28 +5,38 @@
 
 ---
 
-## 🚀 Features
-- 🔌 **Automated Power Control**: Disables power outlets when a child is detected.
-- 📡 **ESP32 Integration**: Communicates with sensors to monitor room activity.
-- 📲 **Android Application**: Provides real-time monitoring and manual override options.
-- 🔥 **Firebase Database**: Stores user data, device configurations, and logs.
-- 📶 **Bluetooth & Wi-Fi Connectivity**: Enables seamless communication between the Android app and ESP32.
-- 🔔 **Notifications**: Alerts parents when a child enters or leaves the room.
+## Features
+✅ **Automated Power Control** – Disables all power sockets when a child enters the room.
+✅ **Real-time Monitoring** – Utilizes sensors connected to an ESP32 board to detect child presence.
+✅ **Wireless Communication** – Communicates seamlessly with the ESP32 board via Bluetooth and Wi-Fi.
+✅ **Cloud-Based Storage** – Uses Firebase to store and manage device and user data.
+✅ **User-Friendly Android Interface** – Intuitive UI for configuring and monitoring socket status.
 
 ---
 
-## 🛠️ Technologies Used
-### **📱 Android Application**
-- **Java** for mobile development
-- **Firebase Firestore** for real-time data storage
-- **Bluetooth API** for ESP32 communication
-- **Retrofit** for network requests (if needed)
+## Technologies Used
+### **Mobile Development**
+- **Android (Java)** – Core application framework
+- **Firebase Realtime Database** – Cloud-based data storage and synchronization
 
-### **🖥️ Embedded System (ESP32)**
-- **Arduino IDE** for firmware development
-- **Bluetooth & Wi-Fi modules** for communication
-- **Motion & Presence Sensors** for child detection
-- **Relay Modules** for controlling power sockets
+### **Embedded Systems**
+- **ESP32 Board** – Microcontroller for handling Bluetooth, Wi-Fi, and sensor communication
+- **Sensors** – Detect child presence in the room
+- **Smart Sockets** – Controlled via ESP32 for power management
+
+### **Networking & Communication**
+- **Bluetooth** – Short-range communication between ESP32 and Android app
+- **Wi-Fi** – Enables cloud connectivity and remote management
+
+---
+
+## System Architecture
+```
++--------------------+        +------------+       +----------------+        +------------+
+|  Android App      | <----> |  Firebase  | <-->  | ESP32 Micro-   | <-->  | Sensors &   |
+| (User Interface)  |        | (Cloud DB) |       | controller     |       | Smart Plugs |
++--------------------+        +------------+       +----------------+        +------------+
+```
 
 ---
 
@@ -42,8 +52,13 @@
 
 ---
 
-## 🔧 Setup & Installation
-### **📱 Android App Setup**
+## Installation & Setup
+### **Prerequisites**
+1. **Android Device** running Android 7.0+
+2. **ESP32 Board** with Bluetooth & Wi-Fi capabilities
+3. **Firebase Account** for real-time database access
+
+### **Android App Setup**
 1. Clone the repository:
    ```sh
    git clone https://github.com/vaggelisbarb/SocketGuardian.git
@@ -55,7 +70,7 @@
    - Download `google-services.json` and place it in `app/`.
 4. Build and run the application on an **Android device** with Bluetooth enabled.
 
-### **🔌 ESP32 Setup**
+### **ESP32 Setup**
 1. Install **Arduino IDE** or **ESP-IDF**.
 2. Add ESP32 Board Support:
    - Install ESP32 libraries.
@@ -68,7 +83,7 @@
 
 ---
 
-## 📡 How It Works
+## How It Works
 1. **Child Enters Room**: Sensors detect movement and presence.
 2. **ESP32 Sends Signal**: Communicates with the Android app via Bluetooth/Wi-Fi.
 3. **Android App Disables Outlets**: The app receives the signal and disables connected sockets.
@@ -77,12 +92,13 @@
 
 ---
 
-## 🎯 Future Improvements
-- 🔄 **Machine Learning**: Improve child detection accuracy.
-- 🌐 **Remote Monitoring**: Control sockets via the internet.
-- 📊 **Usage Analytics**: Track power usage for insights.
+## Future Enhancements
+🔹 **AI-Based Child Detection** – Integrate machine learning for enhanced child presence detection.  
+🔹 **Remote Monitoring & Alerts** – Implement notifications when power sockets are deactivated.  
+🔹 **Multi-Room Support** – Expand functionality to manage multiple rooms simultaneously.
 
 ---
 
-## 🤝 Contributing
-Contributions are welcome! Feel free to submit a pull request or report an issue.
+### **Development Team**  
+- **Panagiotis Stavarakis** – *Co-Creator, Embedded Systems Developer & Database Contributor*  
+- **Evangelos Barmpalias** – *Core Developer & Co-Creator*  
