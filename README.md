@@ -7,9 +7,13 @@
 
 ## Features
 🔹 **Automated Power Control** – Disables all power sockets when a child enters the room.
+
 🔹 **Real-time Monitoring** – Utilizes sensors connected to an ESP32 board to detect child presence.
+
 🔹 **Wireless Communication** – Communicates seamlessly with the ESP32 board via Bluetooth and Wi-Fi.
+
 🔹 **Cloud-Based Storage** – Uses Firebase to store and manage device and user data.
+
 🔹 **User-Friendly Android Interface** – Intuitive UI for configuring and monitoring socket status.
 
 ---
